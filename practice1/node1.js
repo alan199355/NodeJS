@@ -9,7 +9,7 @@ var server=http.createServer(function(req,res){
     //     console.log('done parsing');
     //     res.end()
     // })
-    console.log('createasdsadasd')
+    console.log('created')
     if('/'==req.url){
         switch (req.method){
             case 'POST':
