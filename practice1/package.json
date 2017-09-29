@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "connect": "^3.6.5",
     "formidable": "^1.1.1",
     "webpack": "^3.6.0"
   }
