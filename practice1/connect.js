@@ -19,9 +19,25 @@ var app = connect();
 app.use(logger)
     // .use('/admin', restrict)
     // .use('/admin', admin)
-    .use(router(routes))
-    .use(hello)
+    // .use(router(routes))
+    // .use(hello)    
+    .use(errorHandler())
     .listen(3000);
+
+function errorHandler(){
+    var env=process.env.NODE_ENV||'development';
+    return function(err,req,res,next){
+        res.statusCode=500;
+        switch(env){
+            case 'development':
+                res.setHeader('Content-Type','application/json');
+                res.end(JSON.stringify(err));
+                break;
+            default:
+                res.end('Server error');
+        }
+    }
+}
 
 function hello(req, res) {
     res.setHeader('Content-Type', 'text/plain');
