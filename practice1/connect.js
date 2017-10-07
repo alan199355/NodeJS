@@ -16,32 +16,103 @@ var routes = {
     }
 }
 var app = connect();
-app.use(logger)
-    // .use('/admin', restrict)
-    // .use('/admin', admin)
-    // .use(router(routes))
-    // .use(hello)    
-    .use(errorHandler())
+var api = connect()
+    .use(users)
+    .use(pets)
+    .use(errorHandler);
+app.use(hello)
+    .use('/api', api)
+    .use(errorPage)
     .listen(3000);
-
-function errorHandler(){
-    var env=process.env.NODE_ENV||'development';
-    return function(err,req,res,next){
-        res.statusCode=500;
-        switch(env){
-            case 'development':
-                res.setHeader('Content-Type','application/json');
-                res.end(JSON.stringify(err));
-                break;
-            default:
-                res.end('Server error');
+var db = {
+    users: [{
+            name: 'tobi'
+        },
+        {
+            name: 'loki'
+        },
+        {
+            name: 'jane'
         }
+    ]
+}
+// app.use(logger)
+//     .use('/admin', restrict)
+//     .use('/admin', admin)
+//     .use(router(routes))
+//     .use(hello)
+//     .use(errorHandler)
+//     .listen(3000);
+
+function users(req, res, next) {
+    var match = req.url.match(/^\/user\/(.+)/);
+    if (match) {
+        var user = db.users[match[1]];
+        if (user) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(user));
+        } else {
+            var err = new Error('User not found');
+            err.notFound = true;
+            next(err);
+        }
+    } else {
+        next();
     }
 }
 
-function hello(req, res) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('hello world');
+function pets(req, res, next) {
+    if (req.url.match(/^\/pet\/(.+)/)) {
+        foo();
+    } else {
+        next();
+    }
+}
+
+// function errorHandler() {
+//     var env = process.env.NODE_ENV || 'development';
+//     return function (err, req, res, next) {
+//         res.statusCode = 500;
+//         switch (env) {
+//             case 'development':
+//                 res.setHeader('Content-Type', 'application/json');
+//                 res.end(JSON.stringify(err));
+//                 break;
+//             default:
+//                 res.end('Server error');
+//         }
+//     }
+// }
+
+function errorHandler(err, req, res, next) {
+    console.log('handler')
+    //console.log(err.stack);
+    res.setHeader('Content-Type', 'application/json');
+    if (err.notFound) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({
+            error: err.message
+        }));
+    } else {
+        res.statusCode = 500;
+        res.end(JSON.stringify({
+            error: 'Interval Server Error'
+        }));
+    }
+}
+
+function errorPage(err, req, res) {
+    console.log('page')
+    console.log(err);
+}
+
+function hello(req, res,next) {
+    if (req.url.match(/^\/hello/)) {
+        res.end('hello world');
+    } else {
+        next();
+    }
+
 }
 
 function logger(req, res, next) {
