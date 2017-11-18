@@ -1,3 +1,4 @@
+import { TestData } from './../TestData';
 import { AccountService } from './../Services/account.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   providers: [AccountService]
 })
 export class DashboardComponent implements OnInit {
-  testData: {};
+  testData = {};
   constructor(
     private accountService: AccountService
   ) { }
