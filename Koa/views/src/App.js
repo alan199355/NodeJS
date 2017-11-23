@@ -15,6 +15,7 @@ class Clock extends React.Component{
   componentWillUnmount(){
     clearInterval(this.timerID);
   }
+  
   tick(){
     this.setState({
       date:new Date()
@@ -25,6 +26,26 @@ class Clock extends React.Component{
       <div>
         <p>It is {this.state.date.toLocaleTimeString()}</p>
       </div>
+    )
+  }
+}
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={isToggleOn:true};
+    //this.handleClick=this.handleClick.bind(this);
+  }
+  handleClick = () => {
+    this.setState(prevState=>({
+      isToggleOn:!prevState.isToggleOn
+    }));
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn?'ON':'OFF'}
+      </button>
     )
   }
 }
@@ -44,6 +65,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Clock />
+        <Toggle />
         <Welcome name="alan" />
       </div>
     );
