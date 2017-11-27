@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Calculator from './TemperatureInput'
+
 
 
 class Clock extends React.Component{
@@ -36,9 +36,9 @@ class Toggle extends React.Component {
   constructor(props) {
     super(props);
     this.state={isToggleOn:true};
-    //this.handleClick=this.handleClick.bind(this);
+    this.handleClick=this.handleClick.bind(this);
   }
-  handleClick = () => {
+  handleClick () {
     this.setState(prevState=>({
       isToggleOn:!prevState.isToggleOn
     }));
@@ -92,7 +92,7 @@ class App extends Component {
     return (
       <div className="App">        
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
@@ -102,7 +102,7 @@ class App extends Component {
         <Toggle />
         <Blog posts={posts} />,
         <Welcome name="alan" />
-        <Calculator />
+        
       </div>
     );
   }
