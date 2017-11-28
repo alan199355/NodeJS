@@ -4,33 +4,6 @@ import "./App.css";
 
 
 
-class Clock extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={date:new Date()};
-  }
-  componentDidMount(){
-    this.timerID=setInterval(
-      ()=>this.tick(),1000
-    )
-  }
-  componentWillUnmount(){
-    clearInterval(this.timerID);
-  }
-  
-  tick(){
-    this.setState({
-      date:new Date()
-    })
-  }
-  render(){
-    return(
-      <div>
-        <p>It is {this.state.date.toLocaleTimeString()}</p>
-      </div>
-    )
-  }
-}
 
 class Toggle extends React.Component {
   constructor(props) {
@@ -97,10 +70,9 @@ class App extends Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Clock />
+        </p>        
         <Toggle />
-        <Blog posts={posts} />,
+        
         <Welcome name="alan" />
         
       </div>
