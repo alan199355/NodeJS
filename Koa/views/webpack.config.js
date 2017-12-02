@@ -1,3 +1,4 @@
+const webpack=require('webpack');
 module.exports = {
   entry: "./index.js",
 
@@ -20,5 +21,11 @@ module.exports = {
       },
       {test: /\.svg/, loader: 'svg-url-loader'}
     ]
-  }
+  },
+  plugins: [
+    new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest: require('./manifest.json'),
+    }),
+],
 };
