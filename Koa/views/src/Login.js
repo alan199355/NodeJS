@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Icon, Input, Button } from 'antd';
+import 'antd/dist/antd.css';
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {

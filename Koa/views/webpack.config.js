@@ -1,7 +1,9 @@
 const webpack=require('webpack');
+const ExtractTextPlugin=require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: "./index.js",
-
+  
   output: {
     filename: "bundle.js",
     publicPath: ""
@@ -12,7 +14,8 @@ module.exports = {
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader?presets[]=react&presets[]=es2015"]
+        loaders: ["babel-loader?presets[]=react&presets[]=es2015"],
+        
       },
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
       {
@@ -22,7 +25,7 @@ module.exports = {
       {test: /\.svg/, loader: 'svg-url-loader'}
     ]
   },
-  plugins: [
+  plugins: [    
     new webpack.DllReferencePlugin({
         context: __dirname,
         manifest: require('./manifest.json'),
