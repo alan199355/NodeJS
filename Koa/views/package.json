@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^2.13.10",
+    "axios": "^0.17.1",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",
     "jsx-loader": "^0.13.2",
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --progress --watch",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dev": "webpack-dev-server --inline --content-base --progress .",
