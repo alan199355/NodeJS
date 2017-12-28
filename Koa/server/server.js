@@ -5,7 +5,7 @@ const router = require("koa-router")();
 const bodyParser = require("koa-bodyparser");
 const cors = require("koa2-cors");
 // 静态资源
-app.use(serve(__dirname + "../views"));
+app.use(serve(__dirname + "/views"));
 // 跨域
 app.use(
   cors({
