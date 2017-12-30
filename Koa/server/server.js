@@ -23,6 +23,7 @@ app.use(router.routes())
 
 router.post("/login", async (ctx, next) => {
   let content = ctx.request.body.name;
+  console.log(ctx.request.query);
   ctx.body = { result: "success" };
   ctx.result = { result: "success" };
   return { result: "success" };
