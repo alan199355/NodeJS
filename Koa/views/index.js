@@ -19,14 +19,7 @@ import {
 // }).then(function(res){
 //     console.log(res);
 // })
-axios
-  .post("http://127.0.0.1:3000/login", { name: "adasda" })
-  .then(response => {
-    console.log(response);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+
 class NavComponent extends React.Component {
   constructor(props) {
     super(props);
