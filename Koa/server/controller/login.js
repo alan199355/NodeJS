@@ -8,6 +8,17 @@ class Login extends App {
     //   username: content.userName,
     //   password: content.password
     // });
+    let test = new model({
+      username: content.userName,
+      password: content.password
+    });
+    test.save(function(err, res) {
+      if (err) {
+        console.log("Error:" + err);
+      } else {
+        console.log("Res:" + res);
+      }
+    });
     ctx.body = content;
   }
 }
