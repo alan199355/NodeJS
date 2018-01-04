@@ -8,18 +8,11 @@ class Login extends App {
     //   username: content.userName,
     //   password: content.password
     // });
-    let test = new model({
+    const res = await service.login({
       username: content.userName,
       password: content.password
     });
-    test.save(function(err, res) {
-      if (err) {
-        console.log("Error:" + err);
-      } else {
-        console.log("Res:" + res);
-      }
-    });
-    ctx.body = content;
+    ctx.body = res;
   }
 }
 module.exports = new Login();
