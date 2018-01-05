@@ -28,17 +28,7 @@ class NavComponent extends React.Component {
   render() {
     return (
       <div>
-        <ul className="navbar">
-          <li>
-            <Link to="/app">Index</Link>
-          </li>
-          <li>
-            <Link to="/calculator">Calculator</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
+        
         <div>{this.props.children}</div>
       </div>
     );
@@ -50,12 +40,13 @@ class Test extends React.Component {
   }
 }
 ReactDOM.render(
+ 
   <HashRouter history={hasHistory}>
-    <NavComponent>
-      <Route path="/app" component={App} />
+     <div>
+      <Route path="/" component={App} />
       <Route path="/calculator" component={Calculator} />
       <Route path="/login" component={Login} />
-    </NavComponent>
+     </div>
   </HashRouter>,
   document.getElementById("root")
 );
