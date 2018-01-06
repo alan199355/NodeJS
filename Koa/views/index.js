@@ -1,16 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
-import App from "./src/App";
-import Calculator from "./src/TemperatureInput";
-import Login from "./src/Login";
-import {
-  BrowserRouter,
-  Route,
-  Link,
-  HashRouter,
-  hasHistory
-} from "react-router-dom";
+import AppRouter from './router'
+
 
 // axios({
 //     method:'POST',
@@ -40,13 +31,7 @@ class Test extends React.Component {
   }
 }
 ReactDOM.render(
- 
-  <HashRouter history={hasHistory}>
-     <div>
-      <Route path="/" component={App} />
-      <Route path="/calculator" component={Calculator} />
-      <Route path="/login" component={Login} />
-     </div>
-  </HashRouter>,
+  <AppRouter></AppRouter>
+  ,
   document.getElementById("root")
 );

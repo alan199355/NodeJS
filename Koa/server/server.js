@@ -30,4 +30,4 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3011);
 console.log("app started at port 3011");
-console.log(config.db);
+console.log(config);
