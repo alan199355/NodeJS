@@ -5,7 +5,8 @@ const vendors = [
     'react-router',
     'antd',
     'react-router-dom',
-    'axios'
+    'axios',
+
 ];
 
 module.exports = {
