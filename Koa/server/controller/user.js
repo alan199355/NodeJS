@@ -13,7 +13,7 @@ class User extends App {
       password: content.password
     });
     ctx.body = res;
-  };
+  }
   async register(ctx) {
     let content = ctx.request.body;
     const res = await userService.register({
@@ -21,6 +21,7 @@ class User extends App {
       password: content.password,
       email: content.email
     });
+    console.log('controller-res:'+res);
     ctx.body = res;
   }
 }

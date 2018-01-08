@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./src/App";
 import Calculator from "./src/TemperatureInput";
 import Login from "./src/Auth/Login/Login";
+import Register from "./src/Auth/Register/Register";
 import {
   BrowserRouter,
   Route,
@@ -22,6 +23,7 @@ class AppRouter extends React.Component{
                 <Route path="/app" component={App} />
                 <Route path="/calculator" component={Calculator} />
                 <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
                 </div>
             </HashRouter>
         )

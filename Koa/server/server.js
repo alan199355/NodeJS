@@ -28,6 +28,11 @@ app.use(bodyParser());
 // 路由
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3011);
-console.log("app started at port 3011");
+try {
+  app.listen(3012);  
+} catch (error) {
+  console.log(error)
+}
+
+console.log("app started at port 3012");
 console.log(config);

@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         axios
-          .post("http://127.0.0.1:3011/api/auth/register", values)
+          .post("http://127.0.0.1:3012/api/auth/register", values)
           .then(response => {
             console.log(response);
           })
