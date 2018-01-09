@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 const FormItem = Form.Item;
@@ -7,25 +7,39 @@ const FormItem = Form.Item;
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-
+async function submitData(val) {
+  const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
+  console.log(res);
+  if (res.data.err) {
+    message.error(res.data.message);
+  } else {
+    message.info(res.data.message);
+  }
+}
 class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        axios
-          .post("http://127.0.0.1:3012/api/auth/register", values)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        // axios
+        //   .post("http://127.0.0.1:3012/api/auth/register", values)
+        //   .then(response => {
+        //     console.log(response);
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
+        submitData(values);
       }
     });
   }
