@@ -10,6 +10,7 @@
     "jsx-loader": "^0.13.2",
     "mongoose": "^5.0.0-rc0",
     "node-sass": "^4.7.2",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-hot-loader": "^3.1.3",

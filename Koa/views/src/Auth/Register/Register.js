@@ -7,15 +7,16 @@ const FormItem = Form.Item;
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-async function submitData(val) {
-  const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
-  console.log(res);
-  if (res.data.err) {
-    message.error(res.data.message);
-  } else {
-    message.info(res.data.message);
-  }
-}
+// async function submitData(val) {
+//   const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
+//   console.log(res);
+//   if (res.data.err) {
+//     message.error(res.data.message);
+//   } else {
+//     message.info(res.data.message);
+//     this.context.router.history.push()
+//   }
+// }
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,21 +26,25 @@ class LoginForm extends React.Component {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitData = this.submitData.bind(this);
+  }
+
+  async submitData(val) {        
+    const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
+    console.log(res);
+    if (res.data.err) {
+      message.error(res.data.message);
+    } else {
+      message.info(res.data.message);
+      this.context.router.history.push('/login');
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // axios
-        //   .post("http://127.0.0.1:3012/api/auth/register", values)
-        //   .then(response => {
-        //     console.log(response);
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
-        submitData(values);
+        this.submitData(values);
       }
     });
   }
@@ -91,6 +96,8 @@ class LoginForm extends React.Component {
     );
   }
 }
-
+LoginForm.contextTypes = {
+  router: React.PropTypes
+};
 const Login = Form.create()(LoginForm);
 export default Login;
