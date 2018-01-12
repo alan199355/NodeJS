@@ -12,7 +12,17 @@ class User extends App {
       username: content.userName,
       password: content.password
     });
-    ctx.body = res;
+    if (res.length > 0) {
+      ctx.body = {
+        result: true,
+        message: "登陆成功"
+      };
+    }else{
+      ctx.body = {
+        result: false,
+        message: "登陆失败"
+      };
+    }    
   }
   async register(ctx) {
     let content = ctx.request.body;
@@ -21,7 +31,7 @@ class User extends App {
       password: content.password,
       email: content.email
     });
-    console.log('controller-res:'+res);
+    console.log("controller-res:" + res);
     ctx.body = res;
   }
 }

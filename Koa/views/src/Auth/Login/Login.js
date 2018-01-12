@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
-import './Login.scss';
+import "./Login.scss";
 import axios from "axios";
 const FormItem = Form.Item;
 
@@ -14,19 +14,17 @@ class LoginForm extends React.Component {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitData = this.submitData.bind(this);
+  }
+  async submitData(val) {
+    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
+    console.log(res);
   }
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        axios
-          .post("http://127.0.0.1:3012/api/auth/login", values)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        this.submitData(values);
       }
     });
   }
