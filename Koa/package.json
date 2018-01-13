@@ -4,6 +4,7 @@
   "description": "koa demo",
   "main": "index.js",
   "dependencies": {
+    "jsonwebtoken": "^8.1.0",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.3.0",
@@ -15,7 +16,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon index.js",
-    "dev":"nodemon index.js & cd views && npm run dev"
+    "dev": "nodemon index.js & cd views && npm run dev"
   },
   "keywords": [
     "koa"

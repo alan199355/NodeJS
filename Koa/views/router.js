@@ -9,7 +9,8 @@ import {
   Route,
   Link,
   HashRouter,
-  hasHistory
+  hasHistory,
+  IndexRoute
 } from "react-router-dom";
 
 class AppRouter extends React.Component{
@@ -19,10 +20,10 @@ class AppRouter extends React.Component{
     render(){
         return(
             <HashRouter history={hasHistory}>
-                <div>
+                <div>                
                 <Route path="/app" component={App} />
                 <Route path="/calculator" component={Calculator} />
-                <Route path="/login" component={Login} />
+                <Route exact path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 </div>
             </HashRouter>
