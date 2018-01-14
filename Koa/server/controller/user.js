@@ -18,6 +18,7 @@ class User extends App {
         expiresIn: 60 * 60
       });
       ctx.body = {
+        ctx: ctx,
         result: true,
         message: "登陆成功",
         token: token
