@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AppRouter from './router'
-
+import AppRouter from './router';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 // axios({
 //     method:'POST',
