@@ -10,6 +10,9 @@ function hasErrors(fieldsError) {
 }
 
 class LoginForm extends React.Component {
+  constructor(props){
+    super(props);
+  }
   componentDidMount() {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
@@ -17,8 +20,8 @@ class LoginForm extends React.Component {
     this.submitData = this.submitData.bind(this);
   }
   async submitData(val) {
-    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    console.log(res);
+    //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
+    console.log(this.props.name);
   }
   handleSubmit(e) {
     e.preventDefault();

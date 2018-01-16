@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import AppRouter from './router';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
+import counter from './src/redux/reducers';
 // axios({
 //     method:'POST',
 //     url:'//:127.0.0.1:3000/login',
@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 // }).then(function(res){
 //     console.log(res);
 // })
-
+const store=createStore(counter);
 class NavComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +32,8 @@ class Test extends React.Component {
   }
 }
 ReactDOM.render(
-  <AppRouter></AppRouter>
+    <AppRouter></AppRouter>
+  
   ,
   document.getElementById("root")
 );
