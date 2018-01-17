@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import App from "./src/App";
 import Calculator from "./src/TemperatureInput";
@@ -10,30 +10,26 @@ import {
   Link,
   HashRouter,
   hasHistory,
-  IndexRoute
+  IndexRoute,
+  Switch
 } from "react-router-dom";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import counter from './src/redux/reducers';
-const store=createStore(counter);
 
-class AppRouter extends React.Component{
+
+class AppRouter extends Component{
     constructor(props){
         super(props);
     }
     
     render(){
-        return(
-            <Provider  store={store}>
-                <HashRouter history={hasHistory}>
-                    <div>                
+        return(            
+            <HashRouter history={hasHistory}>
+                <Switch>
                     <Route path="/app" component={App} />
                     <Route path="/calculator" component={Calculator} />
                     <Route name="adasdasda" exact path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    </div>
-                </HashRouter>
-            </Provider>
+                </Switch>
+            </HashRouter>            
            
         )
     }

@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
   }
   async submitData(val) {
     //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    console.log(this.props.name);
+    console.log('this.props.name');
   }
   handleSubmit(e) {
     e.preventDefault();
