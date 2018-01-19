@@ -11,7 +11,7 @@ const render = Component => {
     // 绑定redux、热加载
     <Provider store={store}>
       <AppContainer>
-        <Component />
+        <Component value={1112222} />
       </AppContainer>
     </Provider>,
     document.getElementById("root")

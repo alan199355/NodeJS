@@ -26,7 +26,7 @@ class AppRouter extends Component{
                 <Switch>
                     <Route path="/app" component={App} />
                     <Route path="/calculator" component={Calculator} />
-                    <Route name="adasdasda" exact path="/login" component={Login} />
+                    <Route value={'adasdasdas'} name="adasdasda" exact path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                 </Switch>
             </HashRouter>            

@@ -1,18 +1,34 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "./Login.scss";
 import axios from "axios";
+import { saveToken } from "../../store/home/action";
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-
-class LoginForm extends React.Component {
-  constructor(props){
+class Test extends React.Component {
+  constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    this.test = this.test.bind(this);
+  }
+  test() {
+    console.log(this.props.value);
+  }
+  render() {
+    return <Button onClick={this.test}>test</Button>;
+  }
+}
+class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
@@ -21,7 +37,8 @@ class LoginForm extends React.Component {
   }
   async submitData(val) {
     //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    console.log('this.props.name');
+    this.props.saveToken('adasdadas');
+    console.log(this.props.token);
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +52,7 @@ class LoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <Test value="prop" />
         <FormItem>
           {getFieldDecorator("userName", {
             rules: [{ required: true, message: "Please input your username!" }]
@@ -79,4 +97,9 @@ class LoginForm extends React.Component {
 }
 
 const Login = Form.create()(LoginForm);
-export default Login;
+const mapStateToProps = state => ({
+  token: "111"
+});
+export default connect(mapStateToProps, {
+  saveToken
+})(Login);
