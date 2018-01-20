@@ -11,10 +11,15 @@ const render = Component => {
     // 绑定redux、热加载
     <Provider store={store}>
       <AppContainer>
-        <Component value={1112222} />
+        <div>
+          <Component value={1112222} />
+          <button onClick={()=>console.log(store.getState())}>test</button>
+        </div>
+        
       </AppContainer>
     </Provider>,
     document.getElementById("root")
   );
 };
+console.log(store.getState());
 render(AppRouter);

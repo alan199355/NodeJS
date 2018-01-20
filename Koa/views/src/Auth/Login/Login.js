@@ -5,6 +5,8 @@ import "antd/dist/antd.css";
 import "./Login.scss";
 import axios from "axios";
 import { saveToken } from "../../store/home/action";
+import AddToken from "../container/test";
+import TokenVal from '../container/test2';
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {
@@ -18,7 +20,7 @@ class Test extends React.Component {
     this.test = this.test.bind(this);
   }
   test() {
-    console.log(this.props.value);
+    console.log(this.props);
   }
   render() {
     return <Button onClick={this.test}>test</Button>;
@@ -37,7 +39,8 @@ class LoginForm extends React.Component {
   }
   async submitData(val) {
     //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    this.props.saveToken('adasdadas');
+    this.props.saveToken("adasdadas");
+    console.log(this.store);
     console.log(this.props.token);
   }
   handleSubmit(e) {
@@ -52,7 +55,7 @@ class LoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-        <Test value="prop" />
+        
         <FormItem>
           {getFieldDecorator("userName", {
             rules: [{ required: true, message: "Please input your username!" }]
@@ -96,7 +99,16 @@ class LoginForm extends React.Component {
   }
 }
 
-const Login = Form.create()(LoginForm);
+let LoginComponent = Form.create()(LoginForm);
+const Login = () => {
+  return (
+    <div>
+      <AddToken />
+      <TokenVal />
+      <LoginComponent />      
+    </div>
+  );
+};
 const mapStateToProps = state => ({
   token: "111"
 });

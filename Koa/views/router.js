@@ -13,6 +13,8 @@ import {
   IndexRoute,
   Switch
 } from "react-router-dom";
+import AddToken from './src/Auth/container/test';
+
 
 
 class AppRouter extends Component{
@@ -22,8 +24,9 @@ class AppRouter extends Component{
     
     render(){
         return(            
-            <HashRouter history={hasHistory}>
+            <HashRouter history={hasHistory}>                
                 <Switch>
+                    
                     <Route path="/app" component={App} />
                     <Route path="/calculator" component={Calculator} />
                     <Route value={'adasdasdas'} name="adasdasda" exact path="/login" component={Login} />
