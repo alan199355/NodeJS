@@ -12,8 +12,7 @@ const render = Component => {
     <Provider store={store}>
       <AppContainer>
         <div>
-          <Component value={1112222} />
-          <button onClick={()=>console.log(store.getState())}>test</button>
+          <Component value={1112222} />          
         </div>
         
       </AppContainer>
@@ -21,5 +20,4 @@ const render = Component => {
     document.getElementById("root")
   );
 };
-console.log(store.getState());
 render(AppRouter);

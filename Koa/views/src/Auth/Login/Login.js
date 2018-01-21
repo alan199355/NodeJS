@@ -12,20 +12,7 @@ const FormItem = Form.Item;
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-class Test extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    this.test = this.test.bind(this);
-  }
-  test() {
-    console.log(this.props);
-  }
-  render() {
-    return <Button onClick={this.test}>test</Button>;
-  }
-}
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -38,9 +25,8 @@ class LoginForm extends React.Component {
     this.submitData = this.submitData.bind(this);
   }
   async submitData(val) {
-    //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    this.props.saveToken("adasdadas");
-    console.log(this.store);
+    //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);    
+    this.props.saveToken('dadsda');
     console.log(this.props.token);
   }
   handleSubmit(e) {
@@ -100,18 +86,23 @@ class LoginForm extends React.Component {
 }
 
 let LoginComponent = Form.create()(LoginForm);
-const Login = () => {
+const Login = (token,dispatch) => {
   return (
-    <div>
+    <div>      
       <AddToken />
-      <TokenVal />
-      <LoginComponent />      
+      <LoginComponent val={token} />      
+      
     </div>
   );
 };
 const mapStateToProps = state => ({
-  token: "111"
+  token: state.appData
 });
+// const mapDispatchToProps=(dispatch)=>({
+//   onClick:()=>{
+//     dispatch
+//   }
+// })
 export default connect(mapStateToProps, {
   saveToken
-})(Login);
+})(LoginComponent);
