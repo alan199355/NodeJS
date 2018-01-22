@@ -7,16 +7,7 @@ const FormItem = Form.Item;
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-// async function submitData(val) {
-//   const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
-//   console.log(res);
-//   if (res.data.err) {
-//     message.error(res.data.message);
-//   } else {
-//     message.info(res.data.message);
-//     this.context.router.history.push()
-//   }
-// }
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +23,7 @@ class LoginForm extends React.Component {
   async submitData(val) {        
     const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
     console.log(res);
-    if (res.data.err) {
+    if (res.data.error) {
       message.error(res.data.message);
     } else {
       message.info(res.data.message);

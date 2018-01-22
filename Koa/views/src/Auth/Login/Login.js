@@ -25,9 +25,11 @@ class LoginForm extends React.Component {
     this.submitData = this.submitData.bind(this);
   }
   async submitData(val) {
-    //const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);    
-    this.props.saveToken('dadsda');
-    console.log(this.props.token);
+    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);            
+    localStorage.setItem('token',res.data.token);
+    if(res.data.result){
+      this.context.router.history.push('/getUserInfo');
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -84,7 +86,9 @@ class LoginForm extends React.Component {
     );
   }
 }
-
+LoginForm.contextTypes = {
+  router: React.PropTypes
+};
 let LoginComponent = Form.create()(LoginForm);
 const Login = (token,dispatch) => {
   return (
@@ -98,11 +102,7 @@ const Login = (token,dispatch) => {
 const mapStateToProps = state => ({
   token: state.appData
 });
-// const mapDispatchToProps=(dispatch)=>({
-//   onClick:()=>{
-//     dispatch
-//   }
-// })
+
 export default connect(mapStateToProps, {
   saveToken
 })(LoginComponent);

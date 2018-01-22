@@ -14,7 +14,7 @@ class User extends App {
       password: content.password
     });
     if (res.length > 0) {
-      const token = jwt.sign({ state: "login" }, "auth", {
+      const token = jwt.sign({ name: content.userName }, "auth", {
         expiresIn: 60 * 60
       });
       ctx.body = {
