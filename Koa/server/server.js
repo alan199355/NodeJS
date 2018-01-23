@@ -35,4 +35,3 @@ try {
 }
 
 console.log("app started at port 3012");
-console.log(config);

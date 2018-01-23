@@ -4,7 +4,8 @@ const user = require("./controller/user");
 
 const routerMap = [
   ["post", "/api/auth/login", user, "login"],
-  ["post", "/api/auth/register", user, "register"]
+  ["post", "/api/auth/register", user, "register"],
+  ["post", "/api/auth/getUserInfo", user, "getUserInfo"]
 ];
 routerMap.map(route => {
   const [method, path, controller, action] = route;

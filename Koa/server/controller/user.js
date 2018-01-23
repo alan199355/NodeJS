@@ -40,5 +40,22 @@ class User extends App {
     console.log("controller-res:" + res);
     ctx.body = res;
   }
+  async getUserInfo(ctx) {
+    let result = {
+      success: true,
+      message: "get"
+    };
+    await jwt.verify(ctx.headers.authorization, "aut22h", function(err, res) {
+      if (err) {
+        result.isVerify = err;
+        console.log(err);
+      } else {
+        result.isVerify = res;
+        console.log(res);
+      }
+    });
+    console.log(result)
+    ctx.body = result;
+  }
 }
 module.exports = new User();

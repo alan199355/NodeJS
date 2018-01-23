@@ -7,7 +7,10 @@ import axios from "axios";
 import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
 import TokenVal from '../container/test2';
+import PropTypes from 'prop-types';
 const FormItem = Form.Item;
+
+
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -25,7 +28,8 @@ class LoginForm extends React.Component {
     this.submitData = this.submitData.bind(this);
   }
   async submitData(val) {
-    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);            
+    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);       
+    axios.defaults.headers.common['Authorization'] = res.data.token;     
     localStorage.setItem('token',res.data.token);
     if(res.data.result){
       this.context.router.history.push('/getUserInfo');
