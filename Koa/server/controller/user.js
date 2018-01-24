@@ -14,9 +14,15 @@ class User extends App {
       password: content.password
     });
     if (res.length > 0) {
-      const token = jwt.sign({ name: content.userName }, "auth", {
-        expiresIn: 60 * 60
-      });
+      const token = jwt.sign(
+        {
+          name: content.userName
+        },
+        "auth",
+        {
+          expiresIn: 60 * 60
+        }
+      );
       ctx.body = {
         ctx: ctx,
         result: true,
@@ -45,16 +51,15 @@ class User extends App {
       success: true,
       message: "get"
     };
-    await jwt.verify(ctx.headers.authorization, "aut22h", function(err, res) {
+    await jwt.verify(ctx.headers.authorization, "auth", function(err, res) {
       if (err) {
-        result.isVerify = err;
-        console.log(err);
+        result.isVerify = false;
       } else {
-        result.isVerify = res;
-        console.log(res);
+        result.isVerify = true;
       }
     });
-    console.log(result)
+    ctx.response.status = 201;
+    console.log(__dirname);
     ctx.body = result;
   }
 }

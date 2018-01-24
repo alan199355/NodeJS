@@ -12,7 +12,8 @@ class GetUserInfo extends React.Component {
     this.getUserInfo = this.getUserInfo.bind(this);
   }
   async getUserInfo() {
-    query.post('auth/getUserInfo')
+    //query.post('auth/getUserInfo');
+    query.post('fileUpload');
     console.log();
     // const res = await axios.post("http://127.0.0.1:3012/api/auth/getUserInfo");
     // console.log(res);
