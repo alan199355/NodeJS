@@ -6,7 +6,7 @@ class FileUpload extends App {
   async readFile(ctx) {
     const res = await service.readFile();
     console.log('controller res:   '+res);
-    ctx.body = "";
+    ctx.body = ctx;
   }
 }
 

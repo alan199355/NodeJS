@@ -13,7 +13,7 @@ module.exports={
                 if (err) 
                     resolve('error')
                 else
-                    resolve(byte.toString());                                    
+                    resolve(byte);                                    
               }      
             )
         }).then(function(data){            
