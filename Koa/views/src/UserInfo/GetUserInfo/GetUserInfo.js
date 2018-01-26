@@ -26,18 +26,25 @@ const props = {
 class GetUserInfo extends React.Component {
   constructor(props) {
     super(props);
-   
+    this.state={
+      value:''
+    };
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.handleChange=this.handleChange.bind(this);
   }
   
   componentDidMount() {
-    this.getUserInfo = this.getUserInfo.bind(this);
+    
+  }
+  handleChange(){
+    //this.setState({value: event.target.value});
+    console.log(event.target.value);
   }
   async getUserInfo() {
     //query.post('auth/getUserInfo');
     query.post("fileUpload");
     console.log(this.props);
-    // const res = await axios.post("http://127.0.0.1:3012/api/auth/getUserInfo");
-    // console.log(res);
+   
   }
   render() {
    
@@ -49,6 +56,10 @@ class GetUserInfo extends React.Component {
             <Icon type="upload" /> Click to Upload
           </Button>
         </Upload>
+        <form>
+          <input type="text" name="value" value={this.state.value} onChange={this.handleChange} />
+        </form>
+        
       </div>
     );
   }
