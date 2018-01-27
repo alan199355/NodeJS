@@ -31,21 +31,26 @@ class GetUserInfo extends React.Component {
     };
     this.getUserInfo = this.getUserInfo.bind(this);
     this.handleChange=this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   componentDidMount() {
     
   }
-  handleChange(){
-    //this.setState({value: event.target.value});
+  handleChange(event){
+    this.setState({value: event.target.value});
     console.log(event.target.value);
+  }
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
   }
   async getUserInfo() {
     //query.post('auth/getUserInfo');
     query.post("fileUpload");
-    console.log(this.props);
-   
+    console.log(this.props);   
   }
+
   render() {
    
     return (
@@ -56,8 +61,9 @@ class GetUserInfo extends React.Component {
             <Icon type="upload" /> Click to Upload
           </Button>
         </Upload>
-        <form>
-          <input type="text" name="value" value={this.state.value} onChange={this.handleChange} />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text"  value={this.state.value} onChange={this.handleChange} />
+          <input type="submit" value="Submit" />
         </form>
         
       </div>
