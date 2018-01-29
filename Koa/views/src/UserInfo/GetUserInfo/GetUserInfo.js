@@ -39,6 +39,7 @@ class GetUserInfo extends React.Component {
   }
   handleChange(event){
     //this.setState({value: event.target.value});
+    console.log(this.refs.fileUpload);
     console.log(event.target.value);
   }
   handleSubmit(event) {
@@ -62,7 +63,7 @@ class GetUserInfo extends React.Component {
           </Button>
         </Upload>
         <form onSubmit={this.handleSubmit}>
-          <input type="file"  value={this.state.value} onChange={this.handleChange} />
+          <input ref="fileUpload" type="file"  value={this.state.value} onChange={this.handleChange} />
           <input type="submit" value="Submit" />
         </form>
         
