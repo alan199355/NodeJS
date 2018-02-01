@@ -8,12 +8,14 @@ const router = require("./router");
 const config = require("./config/config");
 const mongoose = require("mongoose");
 const multer = require("koa-multer");
+const logger=require('koa-logger');
 const { host, database, port } = config.db;
 
 // 数据库
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/yeqiang");
 
+app.use(logger());
 // 静态资源
 app.use(serve(__dirname + "/views"));
 // 跨域
@@ -28,7 +30,8 @@ app.use(
 );
 
 app.use(body({ multipart: true }));
-app.use(bodyParser());
+// app.use(bodyParser());
+
 // 路由
 app.use(router.routes()).use(router.allowedMethods());
 

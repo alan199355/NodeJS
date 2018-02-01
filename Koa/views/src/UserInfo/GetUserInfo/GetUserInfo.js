@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, Checkbox, Upload, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import { query } from "../../config/config";
-
+import $ from 'jquery';
 
 
 class GetUserInfo extends React.Component {
@@ -31,8 +31,9 @@ class GetUserInfo extends React.Component {
   }
   async getUserInfo() {
     //query.post('auth/getUserInfo');
-    query.post("fileUpload");
+    //query.post("fileUpload");
     console.log(this.props);
+    
   }
 
   render() {
@@ -44,8 +45,8 @@ class GetUserInfo extends React.Component {
           <input
             ref="fileUpload"
             type="file"
-            value={this.state.value}
             onChange={this.handleChange}
+            
             name="imgData"
           />
           <input type="submit" value="Submit" />

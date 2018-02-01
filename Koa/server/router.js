@@ -22,15 +22,13 @@ const fileUpload = require("./controller/FileUpload");
 //     controller[action].bind(Object.assign(controller, { ctx }))(ctx, next)
 //   );
 // });
-router.post("/api/upload",function(ctx) {
-  form.uploadDir = path.join(__dirname + "/upload");
-  console.log('111');
-  form.parse(ctx.req,function(err, fields, files) {
-    if (err) throw err;
-    console.log('adasda');
-//    console.log(files);
-  });
-  console.log('222');
-  ctx.body = 'test';
+router.post("/api/upload",async function(ctx) {
+  const file=ctx.request.body.files;
+
+  // form.uploadDir = path.join(__dirname + "/upload");
+  // form.parse(ctx.req,function(err, fields, files) {
+  //   if (err) throw err;
+  // });
+  ctx.body = file;
 });
 module.exports = router;
