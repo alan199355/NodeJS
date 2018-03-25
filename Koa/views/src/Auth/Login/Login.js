@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "./Login.scss";
@@ -26,6 +27,18 @@ class LoginForm extends React.Component {
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitData = this.submitData.bind(this);
+    let arr=[1,2,3];
+    let weekDay=moment().format("E");
+    console.log(weekDay);
+    arr.forEach((val)=>{
+      let interval=0;
+      if(weekDay>val){
+        interval=val+7-weekDay
+      }else{
+        interval=val-weekDay
+      }
+      console.log(moment().add(interval,'days').format('YYYY-MM-DD'))      
+    })
   }
   async submitData(val) {
     const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);       
@@ -90,9 +103,9 @@ class LoginForm extends React.Component {
     );
   }
 }
-LoginForm.contextTypes = {
-  router: React.PropTypes
-};
+// LoginForm.contextTypes = {
+//   router: React.PropTypes
+// };
 let LoginComponent = Form.create()(LoginForm);
 const Login = (token,dispatch) => {
   return (
