@@ -15,15 +15,26 @@ class GetUserInfo extends React.Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitImage=this.submitImage.bind(this);
   }
 
   componentDidMount() {}
-  handleChange(event) {
+  submitImage(event) {
     //this.setState({value: event.target.value});
     let data = new FormData();
     let fileData = this.refs.fileUpload.files[0];
     data.append('imgData',fileData);
-    query.post("upload", data);
+    query({
+      method:'post',
+      url:'http://127.0.0.1:3012/api/upload',
+      data:data
+    }).then(res=>{
+      console.log(res,'111')
+    })
+    // query.post("upload", data);
+  }
+  handleChange(event){
+    console.log(event)
   }
   handleSubmit(event) {
     alert("An essay was submitted: " + this.state.value);
@@ -41,7 +52,7 @@ class GetUserInfo extends React.Component {
       <div>
         <Button onClick={this.getUserInfo}>get user info</Button>
         
-        <form action="http://127.0.0.1:3012/api/upload" method="post" encType="multipart/form-data">
+        <form  encType="multipart/form-data">
           <input
             ref="fileUpload"
             type="file"
@@ -49,7 +60,7 @@ class GetUserInfo extends React.Component {
             
             name="imgData"
           />
-          <input type="submit" value="Submit" />
+          <Button onClick={this.submitImage}>submit</Button>
         </form>
       </div>
     );

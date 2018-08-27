@@ -17,7 +17,10 @@
     "koa2-cors": "^2.0.5",
     "mongoose": "^5.0.0-rc0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ali-oss": "^6.0.1",
+    "co": "^4.6.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon index.js",
