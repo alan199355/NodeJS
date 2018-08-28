@@ -29,34 +29,40 @@ const co = require('co');
 // });
 router.post("/api/upload",async function(ctx,next) {
   const file=ctx.request.body.files;
-  let alioss_upfile=function(){
-    return new Promise(function(resolve,reject){
-      const form=new formidable.IncomingForm();
-      form.parse(ctx.req, function(err,fields,files) {
-          if(err) throw err;
-          let date=new Date();
-          let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
-          let filepath=time+'/'+date.getTime();
-          let fileext=files.file.name.split('.');
-          let upfile=files.file.path;
-          let newfile=filepath+'.'+fileext[1];
-          console.log(filepath);
-          resolve(next());
-          // co(function*(){
-          //   client.useBucket('yeqiang');
-          //   let res=yield client.put(newfile,upfile);
-          //   ctx.response.type = 'json';
-          //   ctx.response.body = result.url;
-          //   resolve(next());
-          // }).catch(function(err){
-          //   reject(next());
-          //   console.log(err)
-          // })
-      })
-    })
+  // let alioss_upfile=function(){
+  //   return new Promise(function(resolve,reject){
+     
+  //   })
+  // }
+  // await alioss_upfile();
+  try {
+    let result = await client.listBuckets();
+    console.log(result)
+  } catch(err) {
+    console.log(err)
   }
-  await alioss_upfile();
- 
- 
+  const form=new formidable.IncomingForm();
+  form.parse(ctx.req, function(err,fields,files) {
+      if(err){ctx.throw('500',err)}
+      let date=new Date();
+      let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
+      let filepath=time+'/'+date.getTime();
+      let fileext=files.file.name.split('.');
+      let upfile=files.file.path;
+      let newfile=filepath+'.'+fileext[1];
+      console.log(filepath);
+     
+      // co(function*(){
+      //   client.useBucket('yeqiang');
+      //   let res=yield client.put(newfile,upfile);
+      //   ctx.response.type = 'json';
+      //   ctx.response.body = result.url;
+      //   resolve(next());
+      // }).catch(function(err){
+      //   reject(next());
+      //   console.log(err)
+      // })
+  })
+  ctx.body='end'
 });
 module.exports = router;
