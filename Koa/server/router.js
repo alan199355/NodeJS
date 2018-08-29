@@ -35,34 +35,28 @@ router.post("/api/upload",async function(ctx,next) {
   //   })
   // }
   // await alioss_upfile();
+  // try {
+  //   let result = await client.listBuckets();
+  //   console.log(result)
+  // } catch(err) {
+  //   console.log(err)
+  // }
+  let date=new Date();
+  let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
+  let filepath=time+'/'+date.getTime();
+  let fileext=file.file.name.split('.')[1]
+  let upfile=file.file.path
+  let newfile=filepath+'.'+fileext
+  client.useBucket('yeqiang')
   try {
-    let result = await client.listBuckets();
-    console.log(result)
-  } catch(err) {
-    console.log(err)
+    let res=await client.put(newfile,upfile)
+    ctx.response.type='json'
+    ctx.response.body=res.url
+    next()
+  } catch (error) {
+    console.log(error)
   }
-  const form=new formidable.IncomingForm();
-  form.parse(ctx.req, function(err,fields,files) {
-      if(err){ctx.throw('500',err)}
-      let date=new Date();
-      let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
-      let filepath=time+'/'+date.getTime();
-      let fileext=files.file.name.split('.');
-      let upfile=files.file.path;
-      let newfile=filepath+'.'+fileext[1];
-      console.log(filepath);
-     
-      // co(function*(){
-      //   client.useBucket('yeqiang');
-      //   let res=yield client.put(newfile,upfile);
-      //   ctx.response.type = 'json';
-      //   ctx.response.body = result.url;
-      //   resolve(next());
-      // }).catch(function(err){
-      //   reject(next());
-      //   console.log(err)
-      // })
-  })
-  ctx.body='end'
+  
+ 
 });
 module.exports = router;
