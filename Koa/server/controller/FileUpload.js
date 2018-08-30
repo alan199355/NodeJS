@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const App = require("./app");
-const formidable = require('formidable');
 const OSS = require('ali-oss');
 const client = new OSS({
   region:'oss-cn-beijing',
@@ -13,27 +12,23 @@ const service = require("../service/FileUpload");
 
 class FileUpload extends App {
   async readFile(ctx) {
-    const res = await service.readFile();
-    const form=new formidable.IncomingForm();
-    form.parse(ctx.req,async function(err,fields,files) {
-        if(err) throw err;
-        let date=new Date();
-        let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
-        let filepath=time+'/'+date.getTime();
-        let fileext=files.file.name.split('.');
-        let upfile=files.file.path;
-        let newfile=filepath+'.'+fileext[1];
-        co(function*(){
-          client.useBucket('yeqiang');
-          let res=yield client.put(newfile,upfile);
-          ctx.response.type = 'json';
-          ctx.response.body = result.url;
-          resolve(next());
-        }).catch(function(err){
-          console.log(err)
-        })
-    })
-    ctx.body = ctx;
+    const file=ctx.request.body.files;
+    let date=new Date();
+    let time=''+date.getFullYear()+date.getMonth()+1+date.getDate();
+    let filepath=time+'/'+date.getTime();
+    let fileext=file.file.name.split('.')[1]
+    let upfile=file.file.path
+    let newfile=filepath+'.'+fileext
+    client.useBucket('yeqiang')
+    try {
+      let res=await client.put(newfile,upfile)
+      ctx.response.type='json'
+      ctx.response.body={
+        url:res.url
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
