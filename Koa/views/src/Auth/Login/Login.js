@@ -1,6 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import moment from "moment";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "./Login.scss";
@@ -9,6 +9,7 @@ import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
 import TokenVal from "../container/test2";
 import PropTypes from "prop-types";
+
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {
@@ -25,29 +26,15 @@ class LoginForm extends React.Component {
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitData = this.submitData.bind(this);
-    let arr = [1, 2, 3];
-    let weekDay = moment().format("E");
-    console.log(weekDay);
-    arr.forEach(val => {
-      let interval = 0;
-      if (weekDay > val) {
-        interval = val + 7 - weekDay;
-      } else {
-        interval = val - weekDay;
-      }
-      console.log(
-        moment()
-          .add(interval, "days")
-          .format("YYYY-MM-DD")
-      );
-    });
+   
   }
   async submitData(val) {
     const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
     axios.defaults.headers.common["Authorization"] = res.data.token;
     localStorage.setItem("token", res.data.token);
     if (res.data.result) {
-      this.context.router.history.push("/getUserInfo");
+      // this.context.router.history.push("/getUserInfo");
+      this.props.history.push('getUserInfo')
     }
   }
   handleSubmit(e) {
