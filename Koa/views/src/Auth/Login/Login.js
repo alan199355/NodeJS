@@ -34,7 +34,6 @@ class LoginForm extends React.Component {
     axios.defaults.headers.common["Authorization"] = res.data.token;
     localStorage.setItem("token", res.data.token);
     if (res.data.result) {
-      // this.context.router.history.push("/getUserInfo");
       this.props.history.push('getUserInfo')
     }
   }
