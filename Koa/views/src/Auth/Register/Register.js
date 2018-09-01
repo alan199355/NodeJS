@@ -27,7 +27,6 @@ class LoginForm extends React.Component {
       "http://127.0.0.1:3012/api/auth/register",
       val
     );
-    console.log(res);
     if (res.data.error) {
       message.error(res.data.message);
     } else {
