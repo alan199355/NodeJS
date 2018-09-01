@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter, BrowserRouter, NavLink } from "react-router-dom";
+
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
@@ -20,14 +22,17 @@ class LoginForm extends React.Component {
     this.submitData = this.submitData.bind(this);
   }
 
-  async submitData(val) {        
-    const res = await axios.post("http://127.0.0.1:3012/api/auth/register", val);
+  async submitData(val) {
+    const res = await axios.post(
+      "http://127.0.0.1:3012/api/auth/register",
+      val
+    );
     console.log(res);
     if (res.data.error) {
       message.error(res.data.message);
     } else {
       message.info(res.data.message);
-      this.context.router.history.push('/login');
+      this.props.history.push('login')
     }
   }
 
@@ -87,8 +92,6 @@ class LoginForm extends React.Component {
     );
   }
 }
-LoginForm.contextTypes = {
-  router: React.PropTypes
-};
+
 const Login = Form.create()(LoginForm);
 export default Login;

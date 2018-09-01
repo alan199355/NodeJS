@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter,BrowserRouter,NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
@@ -7,6 +7,7 @@ import "./Login.scss";
 import axios from "axios";
 import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
+
 import TokenVal from "../container/test2";
 import PropTypes from "prop-types";
 
@@ -85,7 +86,9 @@ class LoginForm extends React.Component {
           >
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or
+          <NavLink to="/register">register now!</NavLink> 
+         
         </FormItem>
       </Form>
     );
