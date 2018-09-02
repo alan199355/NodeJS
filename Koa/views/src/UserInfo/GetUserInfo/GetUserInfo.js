@@ -10,7 +10,8 @@ class GetUserInfo extends React.Component {
     super(props);
     this.state = {
       value: "",
-      file: ""
+      file: "",
+      imgUrl:''
     };
     this.getUserInfo = this.getUserInfo.bind(this);
     this.handleChange = this.handleChange.bind(this)
@@ -28,7 +29,10 @@ class GetUserInfo extends React.Component {
     var data = new FormData(form);
 
     axios.post("http://127.0.0.1:3012/api/upload", data, config).then(res => {
-      console.log(res);
+      this.setState({
+        imgUrl:res.data.url
+      })
+      console.log(this.state);
     });
   }
   handleChange(e) {
@@ -64,6 +68,7 @@ class GetUserInfo extends React.Component {
           />
           <Button onClick={this.submitImage}>submit</Button>
         </form>
+        <img src={this.state.imgUrl} />
       </div>
     );
   }
