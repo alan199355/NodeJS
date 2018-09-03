@@ -11,10 +11,10 @@ class GetUserInfo extends React.Component {
     this.state = {
       value: "",
       file: "",
-      imgUrl:''
+      imgUrl: ""
     };
     this.getUserInfo = this.getUserInfo.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitImage = this.submitImage.bind(this);
   }
@@ -30,8 +30,8 @@ class GetUserInfo extends React.Component {
 
     axios.post("http://127.0.0.1:3012/api/upload", data, config).then(res => {
       this.setState({
-        imgUrl:res.data.url
-      })
+        imgUrl: res.data.url
+      });
       console.log(this.state);
     });
   }
