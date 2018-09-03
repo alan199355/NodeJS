@@ -8,8 +8,6 @@ import axios from "axios";
 import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
 
-import TokenVal from "../container/test2";
-import PropTypes from "prop-types";
 
 const FormItem = Form.Item;
 
