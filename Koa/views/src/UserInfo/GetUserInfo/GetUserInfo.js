@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Icon, Input, Button, Checkbox, Upload, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import './getUserInfo.scss'
+import "./getUserInfo.scss";
 import { query } from "../../config/config";
 import $ from "jquery";
 
