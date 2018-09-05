@@ -31,10 +31,11 @@ class AppRouter extends Component {
           // <Route exact path="/login" component={Login} />
           // <Route path="/register" component={Register} />
           <Route path="/app" component={App} />
-          <Route path="/home/getUserInfo" component={GetUserInfo} />
-          <LayoutContainer path="home" component={LayoutContainer}>
-            <Route path="/home/getUserInfo" component={GetUserInfo} />
-          </LayoutContainer>
+          <Route path="/getUserInfo" component={GetUserInfo} />
+          <Route path="/home" component={LayoutContainer}></Route>
+          // <LayoutContainer path="home" component={LayoutContainer}>
+          //   <Route path="/home/getUserInfo" component={GetUserInfo} />
+          // </LayoutContainer>
         </Switch>
       </HashRouter>
     );

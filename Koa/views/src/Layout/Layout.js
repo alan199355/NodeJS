@@ -2,10 +2,13 @@ import React from "react";
 import {
     Layout,
     Menu,
-    Icon
+    Icon,
 } from 'antd';
+import {Switch,Route} from 'react-router-dom'
 import "antd/dist/antd.css";
-import Sider from "antd/lib/layout/Sider";
+import GetUserInfo from '../UserInfo/GetUserInfo/GetUserInfo'
+const { Header, Content, Footer, Sider } = Layout;
+// import Sider from "antd/lib/layout/Sider";
 
 class LayoutContainer extends React.Component {
     constructor(props) {
@@ -23,6 +26,16 @@ class LayoutContainer extends React.Component {
                     </Menu.Item>
                     </Menu>
                 </Sider>
+                <Layout style={{ marginLeft: 200 }}>
+                    <Header style={{ background: '#fff', padding: 0 }} /> 
+                    <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                        <div>
+                            <Switch>
+                                <Route path="/home/getUserInfo" component={GetUserInfo}></Route>
+                            </Switch>
+                        </div>
+                    </Content>
+                </Layout>
             </Layout>
         )
     }
