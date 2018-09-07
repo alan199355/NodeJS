@@ -20,4 +20,8 @@ const render = Component => {
     document.getElementById("root")
   );
 };
+
+if (module.hot) {
+  module.hot.accept()
+}
 render(AppRouter);

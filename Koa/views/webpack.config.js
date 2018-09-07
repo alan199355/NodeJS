@@ -2,13 +2,18 @@ const webpack=require('webpack');
 const ExtractTextPlugin=require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: "./index.js",
+  entry: [
+    'react-hot-loader/patch',
+    "./index.js"
+  ],
   
   output: {
     filename: "bundle.js",
     publicPath: ""
   },
-
+  devServer:{
+    hot:true
+  },
   module: {
     loaders: [
       {
@@ -37,5 +42,6 @@ module.exports = {
         context: __dirname,
         manifest: require('./manifest.json'),
     }),
+    new webpack.HotModuleReplacementPlugin()
 ],
 };
