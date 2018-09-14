@@ -19,11 +19,12 @@ const instance = Axios.create({
   responseType: 'json',
   withCredentials: true,
   headers: {
-    deviceType: '6'
+    
   },
   intercept: 'all' // 拦截器选项,all:then和catch均通过拦截器,resolve:只有then通过拦截器,reject:只有catch通过拦截器,none:then和catch均不通过拦截器
 })
 instance.interceptors.request.use((config) => {
+  console.log(config,'123456')
   // axios post请求data值类型为urlencode或URLSearchParams,Content-Type会默认设置为application/x-www-form-urlencoded,但在http请求为参数统一,不允许使用对象类型外值,还是显示设置Content-Type
   if (config.method === 'post') {
     // config.data = qs.stringify(config.data)

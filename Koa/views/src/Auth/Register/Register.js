@@ -33,12 +33,17 @@ class LoginForm extends React.Component {
     //   message.info(res.data.message);
     //   this.props.history.push('login')
     // }
-    // let res=await userAPI.register({
-    //   data:val
-    // }).then(res=>{
-    //   console.log(res)
-    // })
-    console.log(userAPI.register)
+   
+    try {
+      let res=await userAPI.register({
+        url:'http://127.0.0.1:3012/api/auth/register',
+        data:val
+      })
+      console(res,'res')
+    } catch (error) {
+      console.log(error)
+    }
+    // console.log(userAPI.register)
   }
 
   handleSubmit(e) {
