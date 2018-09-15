@@ -37,8 +37,8 @@ class User extends App {
     }
   }
   async register(ctx) {
-    console.log('adasdasd')
     let content = ctx.request.body;
+
     const res = await userService.register({
       username: content.username,
       password: content.password,

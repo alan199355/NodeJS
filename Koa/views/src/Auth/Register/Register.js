@@ -39,11 +39,11 @@ class LoginForm extends React.Component {
         url:'http://127.0.0.1:3012/api/auth/register',
         data:val
       })
-      console(res,'res')
+      console.log(res,'res')
     } catch (error) {
       console.log(error)
     }
-    // console.log(userAPI.register)
+    console.log(userAPI.register)
   }
 
   handleSubmit(e) {
