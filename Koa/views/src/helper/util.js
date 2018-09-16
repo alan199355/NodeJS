@@ -7,7 +7,7 @@ export default {
   // 预发布环境地址
   // apiServer: 'https://uatapi.fenghezhumeng.cn/',
   // 测试环境
-  apiServer: '"http://127.0.0.1:3012/',
+  apiServer: 'http://127.0.0.1:3012/',
   // 开发环境
   // apiServer: 'http://192.168.37.137:8201',
   /* apiServer () {

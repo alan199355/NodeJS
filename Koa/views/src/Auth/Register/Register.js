@@ -23,27 +23,17 @@ class LoginForm extends React.Component {
   }
 
   async submitData(val) {
-    // const res = await axios.post(
-    //   "http://127.0.0.1:3012/api/auth/register",
-    //   val
-    // );
-    // if (res.data.error) {
-    //   message.error(res.data.message);
-    // } else {
-    //   message.info(res.data.message);
-    //   this.props.history.push('login')
-    // }
+   
    
     try {
       let res=await userAPI.register({
-        url:'http://127.0.0.1:3012/api/auth/register',
         data:val
       })
-      console.log(res,'res')
+      message.info(res.data.message);
     } catch (error) {
+      message.error(error);
       console.log(error)
     }
-    console.log(userAPI.register)
   }
 
   handleSubmit(e) {
