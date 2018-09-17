@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
       })
       if(res.data.result){
         window.sessionStorage.setItem('token',res.data.token)
-        this.props.history.push('getUserInfo')
+        this.props.history.push('home/getUserInfo')
       }
     } catch (error) {
       message.error(error);

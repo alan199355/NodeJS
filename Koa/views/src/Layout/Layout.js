@@ -26,7 +26,7 @@ class LayoutContainer extends React.Component {
                     <Menu onClick={this.handleClick} theme="dark" mode="inline" defaultSelectedKeys={['4']}>
                         <Menu.Item  key="1">
                             <Icon type="user" />
-                            <span className="nav-text">yeqiang</span>
+                            <span className="nav-text">yeqiang111</span>
                         </Menu.Item>
                         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
                             <Menu.Item  key="5">Option 5</Menu.Item>
