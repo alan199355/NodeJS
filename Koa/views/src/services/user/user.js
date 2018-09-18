@@ -13,9 +13,9 @@ const settings = {
     method: 'post',
     data: {}
   },
-  // 获取成就详情
-  getAchievementDetail: {
-    url: 'service-user/app/user/achievementDetail',
+  // 获取用户列表
+  getUserList: {
+    url: 'api/user/getUserList',
     method: 'get',
     params: {}
   }
