@@ -14,12 +14,10 @@ class User extends App {
       password: content.password
     });
     if (res.length > 0) {
-      const token = jwt.sign(
-        {
+      const token = jwt.sign({
           name: content.userName
         },
-        "auth",
-        {
+        "auth", {
           expiresIn: 60 * 60
         }
       );
@@ -52,7 +50,7 @@ class User extends App {
       success: true,
       message: "get"
     };
-    await jwt.verify(ctx.headers.authorization, "auth", function(err, res) {
+    await jwt.verify(ctx.headers.authorization, "auth", function (err, res) {
       if (err) {
         result.isVerify = false;
       } else {
@@ -62,6 +60,10 @@ class User extends App {
     ctx.response.status = 201;
     console.log(__dirname);
     ctx.body = result;
+  }
+  async getUserList(ctx) {
+    const res = await userService.getUserList()
+    ctx.body = res
   }
 }
 module.exports = new User();

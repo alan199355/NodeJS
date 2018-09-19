@@ -7,6 +7,7 @@ import {
 import {Switch,Route,NavLink} from 'react-router-dom'
 import "antd/dist/antd.css";
 import GetUserInfo from '../UserInfo/GetUserInfo/GetUserInfo'
+import UserList from '../User/UserList/UserList'
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu=Menu.SubMenu
 // import Sider from "antd/lib/layout/Sider";
@@ -29,7 +30,9 @@ class LayoutContainer extends React.Component {
                             <span className="nav-text">yeqiang111</span>
                         </Menu.Item>
                         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-                            <Menu.Item  key="5">Option 5</Menu.Item>
+                            <Menu.Item  key="5">
+                                <NavLink to="/home/userList">userList</NavLink> 
+                            </Menu.Item>
                             <Menu.Item key="6">Option 6</Menu.Item>
                             <Menu.Item key="7">Option 7</Menu.Item>
                             <Menu.Item key="8">Option 8</Menu.Item>
@@ -42,6 +45,7 @@ class LayoutContainer extends React.Component {
                         <div>
                             <Switch>
                                 <Route path="/home/getUserInfo" component={GetUserInfo}></Route>
+                                <Route path="/home/userList" component={UserList}></Route>
                             </Switch>
                         </div>
                     </Content>
