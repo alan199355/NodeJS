@@ -1,18 +1,28 @@
 import React from 'react';
+import { Table, Divider, Tag } from 'antd';
+const { Column, ColumnGroup } = Table;
 import {userAPI} from '../../services/user'
 
 class UserList extends React.Component {
   constructor() {
     super();
-    this.state = { someKey: 'someValue' };
+    this.state = { userList:[] };
   }
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    return (
+        <Table dataSource={this.state.userList}>
+            <Column title="_id" key="_id" />
+            <Column title="username" key="username" />
+            <Column title="password" key="password" />
+            <Column title="email" key="email" />
+
+        </Table>
+    )
   }
 
   componentDidMount() {
-    this.setState({ someKey: 'otherValue' });
+    // this.setState({ someKey: 'otherValue' });
     this.getUserList=this.getUserList.bind(this)
     this.getUserList()
   }
@@ -20,7 +30,10 @@ class UserList extends React.Component {
   async getUserList(){
       try {
         let res=await userAPI.getUserList()
-        console.log(res)
+        this.setState({
+            userList:res.data
+        })
+        console.log(this.state.userList,'adsdas')
       } catch (error) {
           
       }
