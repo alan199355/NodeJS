@@ -12,10 +12,10 @@ class UserList extends React.Component {
   render() {
     return (
         <Table dataSource={this.state.userList}>
-            <Column title="_id" key="_id" />
-            <Column title="username" key="username" />
-            <Column title="password" key="password" />
-            <Column title="email" key="email" />
+           
+            <Column title="username" dataIndex="username" key="username" />
+            <Column title="password" dataIndex="password" key="password" />
+            <Column title="email" dataIndex="email" key="email" />
 
         </Table>
     )
