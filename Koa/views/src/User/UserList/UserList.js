@@ -3,31 +3,65 @@ import { Table, Divider, Tag,Button } from "antd";
 const { Column, ColumnGroup } = Table;
 import { userAPI } from "../../services/user";
 
+let columns=[
+  {
+    title:'username',
+    dataIndex:'username'
+  },
+  {
+    title:'password',
+    dataIndex:'password'
+  },
+  {
+    title:'email',
+    dataIndex:'email'
+  },
+  {
+    title:'action',
+    dataIndex:'action',
+    render:record => {
+      return (
+        <span>
+          <a href="javascript:;">编辑</a> 
+          <Divider type="vertical" />
+          <a href="javascript:;">删除</a>
+        </span>
+      )
+    }
+    
+  }
+]
+
 class UserList extends React.Component {
   constructor() {
     super();
     this.state = { userList: [] };
   }
-
+ 
   render() {
     return (
-      <Table dataSource={this.state.userList}>
-        <Column title="username" dataIndex="username" key="username" />
-        <Column title="password" dataIndex="password" key="password" />
-        <Column title="email" dataIndex="email" key="email" />
-        <Column
-          title="Action"
-          key="action"
-          dataIndex="action"
-          render={record => (
-            <span>
-              <a href="javascript:;">编辑</a>
-              <Divider type="vertical" />
-              <a href="javascript:;">删除</a>
-            </span>
-          )}
-        />
-      </Table>
+      <Table 
+        columns={columns}
+        rowKey={record => record._id}
+        dataSource={this.state.userList}
+       />
+      // <Table dataSource={this.state.userList}>
+      //   <Column title="username" dataIndex="username" key="username" />
+      //   <Column title="password" dataIndex="password" key="password" />
+      //   <Column title="email" dataIndex="email" key="email" />
+      //   <Column
+      //     title="Action"
+      //     key="action"
+      //     dataIndex="action"
+      //     render={record => (
+      //       <span>
+      //         <a href="javascript:;">编辑</a>
+      //         <Divider type="vertical" />
+      //         <a href="javascript:;">删除</a>
+      //       </span>
+      //     )}
+      //   />
+      // </Table>
     );
   }
 
