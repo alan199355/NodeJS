@@ -3,45 +3,46 @@ import { Table, Divider, Tag,Button } from "antd";
 const { Column, ColumnGroup } = Table;
 import { userAPI } from "../../services/user";
 
-let columns=[
-  {
-    title:'username',
-    dataIndex:'username'
-  },
-  {
-    title:'password',
-    dataIndex:'password'
-  },
-  {
-    title:'email',
-    dataIndex:'email'
-  },
-  {
-    title:'action',
-    dataIndex:'action',
-    render:record => {
-      return (
-        <span>
-          <a href="javascript:;">编辑</a> 
-          <Divider type="vertical" />
-          <a href="javascript:;">删除</a>
-        </span>
-      )
-    }
-    
-  }
-]
+
 
 class UserList extends React.Component {
   constructor() {
     super();
     this.state = { userList: [] };
+    this.columns=[
+      {
+        title:'username',
+        dataIndex:'username'
+      },
+      {
+        title:'password',
+        dataIndex:'password'
+      },
+      {
+        title:'email',
+        dataIndex:'email'
+      },
+      {
+        title:'action',
+        dataIndex:'action',
+        render:record => (
+          <span>
+            <a href="javascript:;">编辑</a> 
+            <Divider type="vertical" />
+            <a href="javascript:;">删除</a>
+          </span>
+        )
+        
+      }
+    ]
   }
- 
+  
+  
+
   render() {
     return (
       <Table 
-        columns={columns}
+        columns={this.columns}
         rowKey={record => record._id}
         dataSource={this.state.userList}
        />
