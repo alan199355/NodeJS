@@ -25,10 +25,9 @@ class UserList extends React.Component {
       {
         title:'action',
         dataIndex:'action',
-        render:record => (
+        render:(record) => (
           <span>
             <a href="javascript:;">编辑</a> 
-            <Divider type="vertical" />
             <a href="javascript:;">删除</a>
           </span>
         )
