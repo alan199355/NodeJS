@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Divider, Tag,Button } from "antd";
 const { Column, ColumnGroup } = Table;
 import { userAPI } from "../../services/user";
-
+import './UserList.scss'
 
 
 class UserList extends React.Component {
@@ -26,8 +26,9 @@ class UserList extends React.Component {
         title:'action',
         dataIndex:'action',
         render:(record) => (
-          <span>
+          <span className="action">
             <a href="javascript:;">编辑</a> 
+            <i class="divider"></i>
             <a href="javascript:;">删除</a>
           </span>
         )
@@ -44,6 +45,7 @@ class UserList extends React.Component {
         columns={this.columns}
         rowKey={record => record._id}
         dataSource={this.state.userList}
+        className="user-list-table"
        />
       // <Table dataSource={this.state.userList}>
       //   <Column title="username" dataIndex="username" key="username" />

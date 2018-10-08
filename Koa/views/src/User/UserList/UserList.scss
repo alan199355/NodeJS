@@ -1,0 +1,15 @@
+.user-list-table{
+    opacity: 1;
+    .action{
+        .divider{
+            margin: 0 5px;
+            width: 1px;
+            height: 10px;
+            display: inline-block;
+            &::after{
+                content: '|';
+                
+            }
+        }
+    }
+}
