@@ -11,33 +11,37 @@ class UserList extends React.Component {
     this.state = { userList: [] };
     this.columns=[
       {
-        title:'username',
+        title:'用户名',
         dataIndex:'username'
       },
       {
-        title:'password',
+        title:'密码',
         dataIndex:'password'
       },
       {
-        title:'email',
+        title:'邮箱',
         dataIndex:'email'
       },
       {
-        title:'action',
+        title:'操作',
         dataIndex:'action',
-        render:(record) => (
-          <span className="action">
-            <a href="javascript:;">编辑</a> 
-            <i class="divider"></i>
-            <a href="javascript:;">删除</a>
-          </span>
-        )
+        render:(record) => {
+          return (
+            <span className="action">
+              <a href="javascript:;">编辑</a> 
+              <i className="divider"></i>
+              <a  onClick={() => this.delete(record)} href="javascript:;">删除</a>
+            </span>
+          )
+        }
         
       }
     ]
   }
   
-  
+  delete(record){
+    console.log('record')
+  }
 
   render() {
     return (
@@ -47,23 +51,7 @@ class UserList extends React.Component {
         dataSource={this.state.userList}
         className="user-list-table"
        />
-      // <Table dataSource={this.state.userList}>
-      //   <Column title="username" dataIndex="username" key="username" />
-      //   <Column title="password" dataIndex="password" key="password" />
-      //   <Column title="email" dataIndex="email" key="email" />
-      //   <Column
-      //     title="Action"
-      //     key="action"
-      //     dataIndex="action"
-      //     render={record => (
-      //       <span>
-      //         <a href="javascript:;">编辑</a>
-      //         <Divider type="vertical" />
-      //         <a href="javascript:;">删除</a>
-      //       </span>
-      //     )}
-      //   />
-      // </Table>
+     
     );
   }
 

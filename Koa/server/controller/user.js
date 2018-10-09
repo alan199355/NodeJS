@@ -65,5 +65,11 @@ class User extends App {
     const res = await userService.getUserList()
     ctx.body = res
   }
+  async deleteUser(ctx) {
+    let content = ctx.request.body
+    let _id = content._id
+    const res = await userService.deleteUser(_id)
+    ctx.body = res
+  }
 }
 module.exports = new User();

@@ -31,5 +31,11 @@ module.exports = {
   async getUserList(obj) {
     const res = await model.find().exec()
     return res
+  },
+  async deleteUser(_id) {
+    const res = await model.remove({
+      _id: _id
+    })
+    return res
   }
 };

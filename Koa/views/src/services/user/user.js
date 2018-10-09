@@ -18,6 +18,12 @@ const settings = {
     url: 'api/user/getUserList',
     method: 'get',
     params: {}
+  },
+  // 删除用户
+  deleteUser:{
+    url:'api/user/deleteUser',
+    method:'get',
+    params:{}
   }
 }
 
