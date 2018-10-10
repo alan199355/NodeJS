@@ -25,12 +25,12 @@ class UserList extends React.Component {
       {
         title:'操作',
         dataIndex:'action',
-        render:(record) => {
+        render:(text,record) => {
           return (
             <span className="action">
               <a href="javascript:;">编辑</a> 
               <i className="divider"></i>
-              <a  onClick={() => this.delete(record)} href="javascript:;">删除</a>
+              <a  onClick={() => this.delete(record,text)} href="javascript:;">删除</a>
             </span>
           )
         }
@@ -39,14 +39,15 @@ class UserList extends React.Component {
     ]
   }
   
-  delete(record){
-    console.log('record')
+  delete(text,record){
+    console.log(text,record)
   }
 
   render() {
+    const columns = this.columns
     return (
       <Table 
-        columns={this.columns}
+        columns={columns}
         rowKey={record => record._id}
         dataSource={this.state.userList}
         className="user-list-table"
