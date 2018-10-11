@@ -30,7 +30,7 @@ class UserList extends React.Component {
             <span className="action">
               <a href="javascript:;">编辑</a> 
               <i className="divider"></i>
-              <a  onClick={() => this.delete(record,text)} href="javascript:;">删除</a>
+              <a  onClick={() => this.delete(record)} href="javascript:;">删除</a>
             </span>
           )
         }
@@ -39,8 +39,15 @@ class UserList extends React.Component {
     ]
   }
   
-  delete(text,record){
-    console.log(text,record)
+  async delete(record){
+    try {
+      let res = await userAPI.deleteUser({
+        data:record._id
+      })
+      console.log(res)
+    } catch (error) {
+      
+    }
   }
 
   render() {
