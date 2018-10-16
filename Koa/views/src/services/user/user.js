@@ -1,4 +1,4 @@
-import buildService from '../../helper/service'
+ import buildService from '../../helper/service'
 // 值类型为String或Object,String为url(method),Object同axios(config)参数支持相同,data和params只能为对象类型
 const settings = {
   // 登陆
@@ -22,8 +22,8 @@ const settings = {
   // 删除用户
   deleteUser:{
     url:'api/user/deleteUser',
-    method:'get',
-    params:{}
+    method:'post',
+    data:{}
   }
 }
 

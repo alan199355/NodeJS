@@ -42,7 +42,7 @@ class UserList extends React.Component {
   async delete(record){
     try {
       let res = await userAPI.deleteUser({
-        data:record._id
+        data:{id:record._id}
       })
       console.log(res)
     } catch (error) {
@@ -53,12 +53,19 @@ class UserList extends React.Component {
   render() {
     const columns = this.columns
     return (
-      <Table 
+      <div>
+        <Button onClick={this.getUserList} type="primary" 
+          className="login-form-button">
+          刷新
+        </Button>
+        <Table 
         columns={columns}
         rowKey={record => record._id}
         dataSource={this.state.userList}
         className="user-list-table"
-       />
+      />
+      </div>
+     
      
     );
   }

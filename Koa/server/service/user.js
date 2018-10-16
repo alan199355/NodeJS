@@ -33,7 +33,8 @@ module.exports = {
     return res
   },
   async deleteUser(_id) {
-    const res = await model.remove({
+    console.log('id:'+_id)
+    const res = await model.deleteOne({
       _id: _id
     })
     return res

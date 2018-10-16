@@ -10,7 +10,7 @@ const routerMap = [
   ["post", "/api/auth/getUserInfo", user, "getUserInfo"],
   ["post", "/api/upload", fileUpload, "readFile"],
   ["get", "/api/user/getUserList", user, "getUserList"],
-  ['get', '/api/user/deleteUser', user, 'deleteUser']
+  ['post', '/api/user/deleteUser', user, 'deleteUser']
 ];
 routerMap.map(route => {
   const [method, path, controller, action] = route

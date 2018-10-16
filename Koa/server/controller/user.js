@@ -67,7 +67,8 @@ class User extends App {
   }
   async deleteUser(ctx) {
     let content = ctx.request.body
-    let _id = content._id
+    let _id = content.id
+    console.info('controller:'+_id)
     const res = await userService.deleteUser(_id)
     ctx.body = res
   }
