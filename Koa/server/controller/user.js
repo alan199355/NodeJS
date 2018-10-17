@@ -70,7 +70,18 @@ class User extends App {
     let _id = content.id
     console.info('controller:'+_id)
     const res = await userService.deleteUser(_id)
-    ctx.body = res
+    if(res.n===0){
+      ctx.body = {
+        success:true,
+        message:'删除失败'
+      }
+    } else {
+      ctx.body = {
+        success:true,
+        message:'删除成功'
+      }
+    }
+    
   }
 }
 module.exports = new User();

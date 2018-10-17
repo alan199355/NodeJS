@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Divider, Tag,Button } from "antd";
+import { Table, Divider, Tag,Button,message } from "antd";
 const { Column, ColumnGroup } = Table;
 import { userAPI } from "../../services/user";
 import './UserList.scss'
@@ -44,7 +44,9 @@ class UserList extends React.Component {
       let res = await userAPI.deleteUser({
         data:{id:record._id}
       })
-      console.log(res)
+      let data=res.data
+      message.info(data.message)
+      this.getUserList()
     } catch (error) {
       
     }
@@ -53,9 +55,9 @@ class UserList extends React.Component {
   render() {
     const columns = this.columns
     return (
-      <div>
+      <div className="user-list-container">
         <Button onClick={this.getUserList} type="primary" 
-          className="login-form-button">
+          className="refresh-button">
           刷新
         </Button>
         <Table 
