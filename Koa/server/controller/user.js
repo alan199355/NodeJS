@@ -14,12 +14,10 @@ class User extends App {
       password: content.password
     });
     if (res.length > 0) {
-      const token = jwt.sign(
-        {
+      const token = jwt.sign({
           name: content.userName
         },
-        "auth",
-        {
+        "auth", {
           expiresIn: 60 * 60
         }
       );
@@ -38,6 +36,7 @@ class User extends App {
   }
   async register(ctx) {
     let content = ctx.request.body;
+
     const res = await userService.register({
       username: content.username,
       password: content.password,
@@ -51,7 +50,7 @@ class User extends App {
       success: true,
       message: "get"
     };
-    await jwt.verify(ctx.headers.authorization, "auth", function(err, res) {
+    await jwt.verify(ctx.headers.authorization, "auth", function (err, res) {
       if (err) {
         result.isVerify = false;
       } else {
@@ -61,6 +60,28 @@ class User extends App {
     ctx.response.status = 201;
     console.log(__dirname);
     ctx.body = result;
+  }
+  async getUserList(ctx) {
+    const res = await userService.getUserList()
+    ctx.body = res
+  }
+  async deleteUser(ctx) {
+    let content = ctx.request.body
+    let _id = content.id
+    console.info('controller:'+_id)
+    const res = await userService.deleteUser(_id)
+    if(res.n===0){
+      ctx.body = {
+        success:true,
+        message:'删除失败'
+      }
+    } else {
+      ctx.body = {
+        success:true,
+        message:'删除成功'
+      }
+    }
+    
   }
 }
 module.exports = new User();

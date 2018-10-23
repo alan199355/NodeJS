@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter, BrowserRouter, NavLink } from "react-router-dom";
-
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
+import {userAPI} from '../../services/user'
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {
@@ -23,15 +23,16 @@ class LoginForm extends React.Component {
   }
 
   async submitData(val) {
-    const res = await axios.post(
-      "http://127.0.0.1:3012/api/auth/register",
-      val
-    );
-    if (res.data.error) {
-      message.error(res.data.message);
-    } else {
+   
+   
+    try {
+      let res=await userAPI.register({
+        data:val
+      })
       message.info(res.data.message);
-      this.props.history.push('login')
+    } catch (error) {
+      message.error(error);
+      console.log(error)
     }
   }
 

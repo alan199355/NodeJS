@@ -4,12 +4,10 @@ import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "./Login.scss";
-import axios from "axios";
+import {userAPI} from '../../services/user'
 import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
 
-import TokenVal from "../container/test2";
-import PropTypes from "prop-types";
 
 const FormItem = Form.Item;
 
@@ -30,12 +28,21 @@ class LoginForm extends React.Component {
    
   }
   async submitData(val) {
-    const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    axios.defaults.headers.common["Authorization"] = res.data.token;
-    localStorage.setItem("token", res.data.token);
-    if (res.data.result) {
-      this.props.history.push('getUserInfo')
+    try {
+      let res=await userAPI.login({
+        data:val
+      })
+      if(res.data.result){
+        window.sessionStorage.setItem('token',res.data.token)
+        this.props.history.push('home/getUserInfo')
+      }
+    } catch (error) {
+      message.error(error);
     }
+    // const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
+    // axios.defaults.headers.common["Authorization"] = res.data.token;
+    // localStorage.setItem("token", res.data.token);
+    
   }
   handleSubmit(e) {
     e.preventDefault();
