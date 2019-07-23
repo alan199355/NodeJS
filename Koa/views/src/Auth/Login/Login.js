@@ -1,13 +1,12 @@
 import React from "react";
-import { withRouter,BrowserRouter,NavLink } from "react-router-dom";
+import { withRouter, BrowserRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "./Login.scss";
-import {userAPI} from '../../services/user'
+import { userAPI } from "../../services/user";
 import { saveToken } from "../../store/home/action";
 import AddToken from "../container/test";
-
 
 const FormItem = Form.Item;
 
@@ -25,30 +24,33 @@ class LoginForm extends React.Component {
     this.props.form.validateFields();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitData = this.submitData.bind(this);
-   
   }
-  async submitData(val) {
+  /**
+   * 登录
+   * @param {obj} userInfo-用户名及密码数据
+   */
+  async login(userInfo) {
     try {
-      let res=await userAPI.login({
-        data:val
-      })
-      if(res.data.result){
-        window.sessionStorage.setItem('token',res.data.token)
-        this.props.history.push('home/getUserInfo')
+      let res = await userAPI.login({
+        data: userInfo
+      });
+      if (res.data.result) {
+        this.props.history.push("home/getUserInfo");
       }
     } catch (error) {
       message.error(error);
     }
-    // const res = await axios.post("http://127.0.0.1:3012/api/auth/login", val);
-    // axios.defaults.headers.common["Authorization"] = res.data.token;
-    // localStorage.setItem("token", res.data.token);
-    
+   
   }
+  /**
+   * 表单提交
+   * @param {*} event
+   */
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.submitData(values);
+        this.login(values);
       }
     });
   }
@@ -57,34 +59,61 @@ class LoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
+          {" "}
           {getFieldDecorator("userName", {
-            rules: [{ required: true, message: "Please input your username!" }]
+            rules: [
+              {
+                required: true,
+                message: "Please input your username!"
+              }
+            ]
           })(
             <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={
+                <Icon
+                  type="user"
+                  style={{
+                    color: "rgba(0,0,0,.25)"
+                  }}
+                />
+              }
               placeholder="Username"
             />
-          )}
+          )}{" "}
         </FormItem>
         <FormItem>
+          {" "}
           {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
+            rules: [
+              {
+                required: true,
+                message: "Please input your Password!"
+              }
+            ]
           })(
             <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              prefix={
+                <Icon
+                  type="lock"
+                  style={{
+                    color: "rgba(0,0,0,.25)"
+                  }}
+                />
+              }
               type="password"
               placeholder="Password"
             />
           )}
         </FormItem>
         <FormItem>
+          {" "}
           {getFieldDecorator("remember", {
             valuePropName: "checked",
             initialValue: true
-          })(<Checkbox>Remember me</Checkbox>)}
+          })(<Checkbox> Remember me </Checkbox>)}{" "}
           <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
+            Forgot password{" "}
+          </a>{" "}
           <Button
             type="primary"
             htmlType="submit"
@@ -92,10 +121,8 @@ class LoginForm extends React.Component {
           >
             Log in
           </Button>
-          Or
-          <NavLink to="/register">register now!</NavLink> 
-         
-        </FormItem>
+          Or <NavLink to="/register"> register now! </NavLink>
+        </FormItem>{" "}
       </Form>
     );
   }
@@ -108,7 +135,7 @@ const Login = (token, dispatch) => {
   return (
     <div>
       <AddToken />
-      <LoginComponent val={token} />
+      <LoginComponent val={token} />{" "}
     </div>
   );
 };

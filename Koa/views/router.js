@@ -29,7 +29,7 @@ class AppRouter extends Component {
           // <Route path="/app" component={App} />
           // <Route path="/calculator" component={Calculator} />
           // <Route exact path="/login" component={Login} />
-          // <Route path="/register" component={Register} />
+          <Route path="/register" component={Register} />
           <Route path="/app" component={App} />
           <Route path="/getUserInfo" component={GetUserInfo} />
           <Route path="/home" component={LayoutContainer}></Route>

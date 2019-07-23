@@ -30,7 +30,11 @@ module.exports = {
   },
   async getUserList(obj) {
     const res = await model.find().exec()
-    return res
+    let response={
+      list:res,
+      totalCount:res.length
+    }    
+    return response
   },
   async deleteUser(_id) {
     console.log('id:'+_id)

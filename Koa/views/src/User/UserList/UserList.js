@@ -63,7 +63,7 @@ class UserList extends React.Component {
         <Table 
         columns={columns}
         rowKey={record => record._id}
-        dataSource={this.state.userList}
+        dataSource={this.state.userList.list}
         className="user-list-table"
       />
       </div>

@@ -20,11 +20,13 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <input id="worker" />
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -40,7 +42,9 @@
       src="http://code.jquery.com/jquery-3.2.1.js"
       integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
       crossorigin="anonymous"></script> -->
+      <script src="./src/worker/mainThread.js"></script>
     <script src="/lib.js"></script>
     <script src="/bundle.js"></script>
-  </body>
+    
+  </body> 
 </html>
