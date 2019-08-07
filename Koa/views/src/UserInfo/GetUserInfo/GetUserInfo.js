@@ -23,7 +23,9 @@ class GetUserInfo extends React.Component {
   componentDidMount() {}
   submitImage(event) {
     let config = {
-      headers: { "Content-Type": "multipart/form-data" }
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
     };
     var form = document.forms[0];
     console.log(form);
@@ -58,8 +60,7 @@ class GetUserInfo extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.getUserInfo}>get user info</Button>
-
+        <Button onClick={this.getUserInfo}> get user info </Button>
         <form name="imageFoem" encType="application/octet-stream">
           <input
             ref="fileUpload"
@@ -67,9 +68,9 @@ class GetUserInfo extends React.Component {
             onChange={this.handleChange}
             name="file"
           />
-          <Button onClick={this.submitImage}>submit</Button>
-        </form>
-        <img src={this.state.imgUrl} />
+          <Button onClick={this.submitImage}> submit </Button>{" "}
+        </form>{" "}
+        <img src={this.state.imgUrl} />{" "}
       </div>
     );
   }

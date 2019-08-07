@@ -5,19 +5,16 @@ const cors = require("koa2-cors");
 const router = require("./router");
 const config = require("./config/config");
 const mongoose = require("mongoose");
-const logger = require('koa-logger');
-const bodyParser = require('koa-bodyparser')
-const {
-  host,
-  database,
-  port
-} = config.db;
+const logger = require("koa-logger");
+const bodyParser = require("koa-bodyparser");
+const { host, database, port } = config.db;
 
 // 数据库
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/yeqiang");
-
-
+mongoose.connect("mongodb://localhost:27017/yeqiang", {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 app.use(logger());
 // 静态资源
@@ -27,7 +24,7 @@ app.use(serve(__dirname + "/views"));
 //   // 允许来自所有域名请求
 //   ctx.set("Access-Control-Allow-Origin", "*");
 //   // 这样就能只允许 http://localhost:8080 这个域名的请求了
-//   // ctx.set("Access-Control-Allow-Origin", "http://localhost:8080"); 
+//   // ctx.set("Access-Control-Allow-Origin", "http://localhost:8080");
 
 //   // 设置所允许的HTTP请求方法
 //   ctx.set("Access-Control-Allow-Methods", "OPTIONS, GET, PUT, POST, DELETE");
@@ -73,14 +70,12 @@ app.use(
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
     maxAge: 5,
     credentials: true,
-    allowMethods: ["GET", "POST", "DELETE","OPTIONS"],
+    allowMethods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization", "Accept"]
   })
 );
 
-app.use(bodyParser())
-
-
+app.use(bodyParser());
 
 // 路由
 app.use(router.routes()).use(router.allowedMethods());

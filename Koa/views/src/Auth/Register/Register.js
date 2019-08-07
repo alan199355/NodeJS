@@ -3,7 +3,7 @@ import { withRouter, BrowserRouter, NavLink } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import {userAPI} from '../../services/user'
+import { userAPI } from "../../services/user";
 const FormItem = Form.Item;
 
 function hasErrors(fieldsError) {
@@ -23,16 +23,14 @@ class LoginForm extends React.Component {
   }
 
   async submitData(val) {
-   
-   
     try {
-      let res=await userAPI.register({
-        data:val
-      })
+      let res = await userAPI.register({
+        data: val
+      });
       message.info(res.data.message);
     } catch (error) {
       message.error(error);
-      console.log(error)
+      console.log(error);
     }
   }
 

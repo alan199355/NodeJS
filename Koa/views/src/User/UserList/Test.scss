@@ -1,0 +1,113 @@
+.container {
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+    position: relative;
+
+    button {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        &.reset {
+            left: 100px;
+        }
+    }
+
+    .list {
+        position: relative;
+
+        li {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            color: #000;
+            line-height: 100px;
+            text-align: center;
+            position: absolute;
+            transition: all ease 2s;
+        }
+
+
+
+        .li-1-1 {
+            top: 0;
+            left: 0;
+        }
+
+        .li-1-2 {
+            top: 0;
+            left: 100px;
+        }
+
+        .li-1-3 {
+            top: 0;
+            left: 200px;
+        }
+
+        .li-1-4 {
+            top: 0;
+            left: 300px;
+        }
+
+        .li-2-1 {
+            top: 100px;
+            left: 0;
+        }
+
+        .li-2-2 {
+            top: 100px;
+            left: 100px;
+        }
+
+        .li-2-3 {
+            top: 100px;
+            left: 200px;
+        }
+
+        .li-2-4 {
+            top: 100px;
+            left: 300px;
+        }
+
+        .li-3-1 {
+            top: 200px;
+            left: 0;
+        }
+
+        .li-3-2 {
+            top: 200px;
+            left: 100px;
+        }
+
+        .li-3-3 {
+            top: 200px;
+            left: 200px;
+        }
+
+        .li-3-4 {
+            top: 200px;
+            left: 300px;
+        }
+
+        .li-4-1 {
+            top: 300px;
+            left: 0;
+        }
+
+        .li-4-2 {
+            top: 300px;
+            left: 100px;
+        }
+
+        .li-4-3 {
+            top: 300px;
+            left: 200px;
+        }
+
+        .li-4-4 {
+            top: 300px;
+            left: 300px;
+        }
+    }
+}

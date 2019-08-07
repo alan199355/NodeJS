@@ -40,7 +40,6 @@ class LoginForm extends React.Component {
     } catch (error) {
       message.error(error);
     }
-   
   }
   /**
    * 表单提交
