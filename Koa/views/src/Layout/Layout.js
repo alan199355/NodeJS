@@ -5,6 +5,7 @@ import "antd/dist/antd.css";
 import GetUserInfo from "../UserInfo/GetUserInfo/GetUserInfo";
 import UserList from "../User/UserList/UserList";
 import Test from "../User/UserList/Test";
+import Debounce from "../Animate/Debounce";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 // import Sider from "antd/lib/layout/Sider";
@@ -53,7 +54,9 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="6">
                 <NavLink to="/home/test">test</NavLink>
               </Menu.Item>
-              <Menu.Item key="7">Option 7</Menu.Item>
+              <Menu.Item key="7">
+                <NavLink to="/home/debounce">防抖动画</NavLink>
+              </Menu.Item>
               <Menu.Item key="8">Option 8</Menu.Item>
             </SubMenu>
           </Menu>
@@ -66,6 +69,7 @@ class LayoutContainer extends React.Component {
                 <Route path="/home/getUserInfo" component={GetUserInfo} />
                 <Route path="/home/userList" component={UserList} />
                 <Route path="/home/test" component={Test} />
+                <Route path="/home/debounce" component={Debounce} />
               </Switch>
             </div>
           </Content>
