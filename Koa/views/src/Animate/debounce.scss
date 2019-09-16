@@ -11,9 +11,18 @@
         border: 1px solid #000;
     }
 
-    canvas {
+    .main {
         width: 500px;
         height: 500px;
-        border: 1px solid #000;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        canvas {
+            width: 500px;
+            height: 200px;
+            border: 1px solid #000;
+        }
     }
+
 }
