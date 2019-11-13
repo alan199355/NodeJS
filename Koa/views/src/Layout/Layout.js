@@ -6,6 +6,7 @@ import GetUserInfo from "../UserInfo/GetUserInfo/GetUserInfo";
 import UserList from "../User/UserList/UserList";
 import Test from "../User/UserList/Test";
 import Debounce from "../Animate/Debounce";
+import Throttle from "../Animate/Throttle";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 // import Sider from "antd/lib/layout/Sider";
@@ -57,7 +58,9 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="7">
                 <NavLink to="/home/debounce">防抖动画</NavLink>
               </Menu.Item>
-              <Menu.Item key="8">Option 8</Menu.Item>
+              <Menu.Item key="8">
+                <NavLink to="/home/throttle">节流动画</NavLink>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -70,6 +73,7 @@ class LayoutContainer extends React.Component {
                 <Route path="/home/userList" component={UserList} />
                 <Route path="/home/test" component={Test} />
                 <Route path="/home/debounce" component={Debounce} />
+                <Route path="/home/throttle" component={Throttle}></Route>
               </Switch>
             </div>
           </Content>
