@@ -7,6 +7,7 @@ import UserList from "../User/UserList/UserList";
 import Test from "../User/UserList/Test";
 import Debounce from "../Animate/Debounce";
 import Throttle from "../Animate/Throttle";
+import BubbleSort from "../Animate/Sort/BubbleSort";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 // import Sider from "antd/lib/layout/Sider";
@@ -61,6 +62,9 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="8">
                 <NavLink to="/home/throttle">节流动画</NavLink>
               </Menu.Item>
+              <Menu.Item key="9">
+                <NavLink to="/home/bubblesort">冒泡排序</NavLink>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -74,6 +78,7 @@ class LayoutContainer extends React.Component {
                 <Route path="/home/test" component={Test} />
                 <Route path="/home/debounce" component={Debounce} />
                 <Route path="/home/throttle" component={Throttle}></Route>
+                <Route path="/home/bubbleSort" component={BubbleSort}></Route>
               </Switch>
             </div>
           </Content>
