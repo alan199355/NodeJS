@@ -28,6 +28,7 @@ class BubbleSort extends React.Component {
         { val: 9, index: 8 }
       ]
     };
+    this.history = [123];
     this.state.list.map(item => {
       item.style = {
         left: item.index * 110 + "px"
@@ -36,34 +37,63 @@ class BubbleSort extends React.Component {
     this.randomList = this.randomList.bind(this);
     this.sort = this.sort.bind(this);
     this.reset = this.reset.bind(this);
+    this.next = this.next.bind(this);
   }
   randomList() {
     console.log("test");
   }
+  next() {
+    let list = this.state.list;
+    list[0].index++;
+
+    list[1].index--;
+    console.log(this);
+    // let temp = JSON.parse(JSON.stringify(list[1]));
+    // let temp2 = JSON.parse(JSON.stringify(list[0]));
+    // list[1] = temp2;
+    // list[0] = temp;
+    this.setState({
+      list: list
+    });
+  }
   async sort() {
     let list = this.state.list;
+    let history = [];
+    let index = 0;
     list.map((item, index) => {
       let nextItem = list[index + 1];
       if (nextItem && item.val < nextItem.val) {
         // let temp = next.style.left;
         // next.style.left = item.style.left;
-        let temp = nextItem;
+
         item.index++;
+        nextItem.index--;
         item.style = {
           left: item.index * 110 + "px"
         };
-        list[index] = nextItem;
-        list[index + 1] = item;
+        nextItem.style = {
+          left: nextItem.index * 110 + "px"
+        };
+        let temp = JSON.parse(JSON.stringify(nextItem));
+        let tempItem = JSON.parse(JSON.stringify(item));
+        console.log(temp, tempItem, item, nextItem, "map");
+        list[index + 1] = tempItem;
+        list[index] = temp;
       }
-      console.log(list);
-      this.setState({
-        list: list
-      });
-      await sleep(1000)
+      history.push(JSON.parse(JSON.stringify(list)));
     });
-    function sleep(ms){
-        return new Promise(resolve=>setTimeout(resolve,ms))
-    }
+    let interval = setInterval(() => {
+      if (index === 9) {
+        clearInterval(interval);
+      } else {
+        this.setState({
+          list: history[index]
+        });
+      }
+      index++;
+    }, 1500);
+
+    console.log(history, "history");
   }
   reset() {
     let resetList = this.state.resetList;
@@ -74,8 +104,11 @@ class BubbleSort extends React.Component {
   render() {
     let renderItem = () => {
       return this.state.list.map(item => {
+        let style = {
+          left: item.index * 110 + "px"
+        };
         return (
-          <li key={item.val} style={item.style}>
+          <li key={item.val} style={style}>
             {item.val}
           </li>
         );
@@ -85,10 +118,13 @@ class BubbleSort extends React.Component {
       <div className="bubble-container">
         <ul className="list">{renderItem()}</ul>
         <Button onClick={this.randomList} type="primary">
-          Random
+          Random11
         </Button>
         <Button onClick={this.sort} type="primary">
           Sort
+        </Button>
+        <Button onClick={this.next} type="primary">
+          Next
         </Button>
         <Button onClick={this.reset} type="primary">
           Reset
