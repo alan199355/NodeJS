@@ -6,15 +6,15 @@ class BubbleSort extends React.Component {
     super();
     this.state = {
       list: [
-        { val: 1, index: 0 },
-        { val: 2, index: 1 },
-        { val: 3, index: 2 },
-        { val: 4, index: 3 },
-        { val: 5, index: 4 },
-        { val: 6, index: 5 },
-        { val: 7, index: 6 },
-        { val: 8, index: 7 },
-        { val: 9, index: 8 }
+        { val: 7 },
+        { val: 1 },
+        { val: 3 },
+        { val: 9 },
+        { val: 4 },
+        { val: 2 },
+        { val: 8 },
+        { val: 5 },
+        { val: 6 }
       ],
       resetList: [
         { val: 1, index: 0 },
@@ -29,10 +29,9 @@ class BubbleSort extends React.Component {
       ]
     };
     this.history = [123];
-    this.state.list.map(item => {
-      item.style = {
-        left: item.index * 110 + "px"
-      };
+    this.state.list.map((item, index) => {
+      item.index = index;
+      item.resetIndex = index;
     });
     this.randomList = this.randomList.bind(this);
     this.sort = this.sort.bind(this);
@@ -43,15 +42,33 @@ class BubbleSort extends React.Component {
     console.log("test");
   }
   next() {
-    let list = this.state.list;
-    list[0].index++;
-
-    list[1].index--;
-    console.log(this);
-    // let temp = JSON.parse(JSON.stringify(list[1]));
-    // let temp2 = JSON.parse(JSON.stringify(list[0]));
-    // list[1] = temp2;
-    // list[0] = temp;
+    let list = [
+      { val: 7, index: 1 },
+      { val: 1, index: 0 },
+      { val: 3, index: 2 },
+      { val: 7, index: 3 },
+      { val: 4, index: 4 },
+      { val: 2, index: 5 },
+      { val: 8, index: 6 },
+      { val: 5, index: 7 },
+      { val: 6, index: 8 }
+    ];
+    setTimeout(() => {
+      let list2 = [
+        { val: 7, index: 2 },
+        { val: 1, index: 0 },
+        { val: 3, index: 1 },
+        { val: 9, index: 3 },
+        { val: 4, index: 4 },
+        { val: 2, index: 5 },
+        { val: 8, index: 6 },
+        { val: 5, index: 7 },
+        { val: 6, index: 8 }
+      ];
+      this.setState({
+        list: list2
+      });
+    }, 1500);
     this.setState({
       list: list
     });
@@ -62,35 +79,41 @@ class BubbleSort extends React.Component {
     let index = 0;
     list.map((item, index) => {
       let nextItem = list[index + 1];
-      if (nextItem && item.val < nextItem.val) {
-        // let temp = next.style.left;
-        // next.style.left = item.style.left;
+      item.class = "blink";
+      if (nextItem) nextItem.class = "blink";
 
+      if (nextItem && item.val > nextItem.val) {
         item.index++;
         nextItem.index--;
-        item.style = {
-          left: item.index * 110 + "px"
-        };
-        nextItem.style = {
-          left: nextItem.index * 110 + "px"
-        };
         let temp = JSON.parse(JSON.stringify(nextItem));
         let tempItem = JSON.parse(JSON.stringify(item));
-        console.log(temp, tempItem, item, nextItem, "map");
+        // console.log(temp, tempItem, item, nextItem, "map");
         list[index + 1] = tempItem;
         list[index] = temp;
+      }
+      if (index > 0) {
+        list[index - 1].class = "";
       }
       history.push(JSON.parse(JSON.stringify(list)));
     });
     let interval = setInterval(() => {
-      if (index === 9) {
-        clearInterval(interval);
-      } else {
-        this.setState({
-          list: history[index]
-        });
-      }
+      console.log("interval");
+      this.setState({
+        list: history[index]
+      });
       index++;
+      if (index === 9) {
+        let lastStatus = history[index - 1];
+        lastStatus.map(item => {
+          item.resetIndex = item.index;
+        });
+        lastStatus[index - 1].class = "";
+        this.setState({
+          list: lastStatus
+        });
+        console.log("end");
+        clearInterval(interval);
+      }
     }, 1500);
 
     console.log(history, "history");
@@ -103,12 +126,17 @@ class BubbleSort extends React.Component {
   }
   render() {
     let renderItem = () => {
-      return this.state.list.map(item => {
+      let list = JSON.parse(JSON.stringify(this.state.list));
+      list.sort((a, b) => {
+        return a.resetIndex - b.resetIndex;
+      });
+      return list.map((item, index) => {
         let style = {
           left: item.index * 110 + "px"
         };
+        style = Object.assign(style, item.style);
         return (
-          <li key={item.val} style={style}>
+          <li className={item.class} key={item.val} style={style}>
             {item.val}
           </li>
         );
