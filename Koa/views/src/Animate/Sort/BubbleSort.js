@@ -39,40 +39,27 @@ class BubbleSort extends React.Component {
     this.next = this.next.bind(this);
   }
   randomList() {
-    console.log("test");
-  }
-  next() {
-    let list = [
-      { val: 7, index: 1 },
-      { val: 1, index: 0 },
-      { val: 3, index: 2 },
-      { val: 7, index: 3 },
-      { val: 4, index: 4 },
-      { val: 2, index: 5 },
-      { val: 8, index: 6 },
-      { val: 5, index: 7 },
-      { val: 6, index: 8 }
-    ];
-    setTimeout(() => {
-      let list2 = [
-        { val: 7, index: 2 },
-        { val: 1, index: 0 },
-        { val: 3, index: 1 },
-        { val: 9, index: 3 },
-        { val: 4, index: 4 },
-        { val: 2, index: 5 },
-        { val: 8, index: 6 },
-        { val: 5, index: 7 },
-        { val: 6, index: 8 }
-      ];
-      this.setState({
-        list: list2
+    let originalList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let randomIndex = 0;
+    let targetList = [];
+    let index = 0;
+    while (originalList.length > 0) {
+      randomIndex = Math.floor(Math.random() * originalList.length);
+      let val = originalList[randomIndex];
+      targetList.push({
+        val: val,
+        index: index,
+        resetIndex: index
       });
-    }, 1500);
+      index++;
+      originalList.splice(randomIndex, 1);
+    }
     this.setState({
-      list: list
+      list: targetList
     });
+    console.log(targetList);
   }
+  next() {}
   async sort() {
     let list = this.state.list;
     let history = [];
