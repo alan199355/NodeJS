@@ -8,6 +8,7 @@ import Test from "../User/UserList/Test";
 import Debounce from "../Animate/Debounce";
 import Throttle from "../Animate/Throttle";
 import BubbleSort from "../Animate/Sort/BubbleSort";
+import QuickSort from "../Animate/Sort/QuickSort";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 // import Sider from "antd/lib/layout/Sider";
@@ -65,6 +66,9 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="9">
                 <NavLink to="/home/bubblesort">冒泡排序</NavLink>
               </Menu.Item>
+              <Menu.Item key="10">
+                <NavLink to="/home/quicksort">快速排序</NavLink>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -79,6 +83,7 @@ class LayoutContainer extends React.Component {
                 <Route path="/home/debounce" component={Debounce} />
                 <Route path="/home/throttle" component={Throttle}></Route>
                 <Route path="/home/bubbleSort" component={BubbleSort}></Route>
+                <Route path="/home/quickSort" component={QuickSort}></Route>
               </Switch>
             </div>
           </Content>
