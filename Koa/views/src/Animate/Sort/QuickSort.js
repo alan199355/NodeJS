@@ -26,7 +26,8 @@ class BubbleSort extends React.Component {
         { val: 7, index: 6 },
         { val: 8, index: 7 },
         { val: 9, index: 8 }
-      ]
+      ],
+      quickSortList: [[], [], []]
     };
     this.history = [123];
     this.state.list.map((item, index) => {
@@ -63,13 +64,16 @@ class BubbleSort extends React.Component {
   sort() {
     let list = this.state.list;
     let res = this.quickSort(list);
-    console.log(res, "quick");
+
+    setTimeout(() => {
+      console.log(this.state.quickSortList, "quick");
+    }, 100);
   }
   quickSort(list) {
     const arr = [...list];
     const leftArr = [];
     const rightArr = [];
-
+    let history = [[], [], []];
     if (arr.length <= 1) {
       return arr;
     }
@@ -85,8 +89,15 @@ class BubbleSort extends React.Component {
       } else {
         rightArr.push(currentEle);
       }
-      console.log(leftArr, centerArr, rightArr);
+      history[0] = JSON.parse(JSON.stringify(leftArr));
+      history[1] = JSON.parse(JSON.stringify(centerArr));
+      history[2] = JSON.parse(JSON.stringify(rightArr));
+      this.setState({
+        quickSortList: history
+      });
+      //   console.log(history, "history");
     }
+
     const leftArrSorted = this.quickSort(leftArr);
     const rightArrSorted = this.quickSort(rightArr);
     return leftArrSorted.concat(centerArr, rightArrSorted);
@@ -115,9 +126,27 @@ class BubbleSort extends React.Component {
         );
       });
     };
+    let renderQuickSort = list => {
+      return list.map((item, index) => {
+        if (Object.prototype.toString.call(item) === "[object Array]") {
+          return this.renderQuickSort(item);
+        } else {
+          let style = {
+            left: item.index * 110 + "px"
+          };
+          style = Object.assign(style, item.style);
+          return (
+            <li className={item.class} key={item.val} style={style}>
+              {item.val}
+            </li>
+          );
+        }
+      });
+    };
     return (
       <div className="bubble-container">
         <ul className="list">{renderItem()}</ul>
+        {/* <ul classNamelist>{renderQuickSort()}</ul> */}
         <Button onClick={this.randomList} type="primary">
           Random11
         </Button>
