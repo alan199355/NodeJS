@@ -27,7 +27,11 @@ class BubbleSort extends React.Component {
         { val: 8, index: 7 },
         { val: 9, index: 8 }
       ],
-      quickSortList: [[], [], []]
+      quickSortHistory: [],
+      quickSortList: [],
+      leftArr: [],
+      centerArr: [],
+      rightArr: []
     };
     this.history = [123];
     this.state.list.map((item, index) => {
@@ -64,10 +68,24 @@ class BubbleSort extends React.Component {
   sort() {
     let list = this.state.list;
     let res = this.quickSort(list);
-
-    setTimeout(() => {
-      console.log(this.state.quickSortList, "quick");
-    }, 100);
+    let index = 0;
+    let history = this.state.quickSortHistory;
+    let interval = setInterval(() => {
+      console.log("pending");
+      if (index === history.length) {
+        console.log("end");
+        clearInterval(interval);
+      } else {
+        this.setState({
+          leftArr: history[index][0],
+          centerArr: history[index][1],
+          rightArr: history[index][2]
+        });
+        index++;
+      }
+    }, 1500);
+    console.log(this.state.quickSortHistory, "quick");
+    setTimeout(() => {}, 100);
   }
   quickSort(list) {
     const arr = [...list];
@@ -89,11 +107,16 @@ class BubbleSort extends React.Component {
       } else {
         rightArr.push(currentEle);
       }
-      history[0] = JSON.parse(JSON.stringify(leftArr));
-      history[1] = JSON.parse(JSON.stringify(centerArr));
-      history[2] = JSON.parse(JSON.stringify(rightArr));
+      //   history[0] = JSON.parse(JSON.stringify(leftArr));
+      //   history[1] = JSON.parse(JSON.stringify(centerArr));
+      //   history[2] = JSON.parse(JSON.stringify(rightArr));
+      history[0] = leftArr;
+      history[1] = centerArr;
+      history[2] = rightArr;
+      let quickList = this.state.quickSortHistory;
+      quickList.push(JSON.parse(JSON.stringify(history)));
       this.setState({
-        quickSortList: history
+        quickSortHistory: quickList
       });
       //   console.log(history, "history");
     }
@@ -126,27 +149,49 @@ class BubbleSort extends React.Component {
         );
       });
     };
-    let renderQuickSort = list => {
+    let renderLeft = () => {
+      let list = JSON.parse(JSON.stringify(this.state.leftArr));
+      console.log(list, "left");
+      return renderQuickItem(list);
+    };
+    let renderCenter = () => {
+      let list = JSON.parse(JSON.stringify(this.state.centerArr));
+      return renderQuickItem(list);
+    };
+    let renderRight = () => {
+      let list = JSON.parse(JSON.stringify(this.state.rightArr));
+      return renderQuickItem(list);
+    };
+    let renderQuickItem = list => {
       return list.map((item, index) => {
-        if (Object.prototype.toString.call(item) === "[object Array]") {
-          return this.renderQuickSort(item);
-        } else {
-          let style = {
-            left: item.index * 110 + "px"
-          };
-          style = Object.assign(style, item.style);
-          return (
-            <li className={item.class} key={item.val} style={style}>
-              {item.val}
-            </li>
-          );
-        }
+        let style = {
+          left: item.index * 110 + "px"
+        };
+        style = Object.assign(style, item.style);
+        return (
+          <li className={item.class} key={item.val} style={style}>
+            {item.val}
+          </li>
+        );
       });
     };
     return (
-      <div className="bubble-container">
+      <div className="quick-container">
         <ul className="list">{renderItem()}</ul>
-        {/* <ul classNamelist>{renderQuickSort()}</ul> */}
+        <ul className="list list-show">
+          <fieldset>
+            <legend>left arr</legend>
+            {renderLeft()}
+          </fieldset>
+          <fieldset>
+            <legend>center arr</legend>
+            {renderCenter()}
+          </fieldset>
+          <fieldset>
+            <legend>right arr</legend>
+            {renderRight()}
+          </fieldset>
+        </ul>
         <Button onClick={this.randomList} type="primary">
           Random11
         </Button>
