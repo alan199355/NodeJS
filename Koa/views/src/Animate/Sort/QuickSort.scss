@@ -10,9 +10,11 @@
 
         &.list-show {
             display: flex;
+            height: 200px;
 
             fieldset {
-                width: 340px;
+                width: 450px;
+                height: 200px;
                 margin-right: 20px;
                 position: relative;
             }

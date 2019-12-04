@@ -67,7 +67,7 @@ class BubbleSort extends React.Component {
   next() {}
   sort() {
     let list = this.state.list;
-    let res = this.quickSort(list);
+    let res = this.quickSort(list, 0, "all");
     let index = 0;
     let history = this.state.quickSortHistory;
     let interval = setInterval(() => {
@@ -77,9 +77,9 @@ class BubbleSort extends React.Component {
         clearInterval(interval);
       } else {
         this.setState({
-          leftArr: history[index][0],
-          centerArr: history[index][1],
-          rightArr: history[index][2]
+          leftArr: history[index].list[0],
+          centerArr: history[index].list[1],
+          rightArr: history[index].list[2]
         });
         index++;
       }
@@ -87,11 +87,11 @@ class BubbleSort extends React.Component {
     console.log(this.state.quickSortHistory, "quick");
     setTimeout(() => {}, 100);
   }
-  quickSort(list) {
+  quickSort(list, level, type) {
     const arr = [...list];
     const leftArr = [];
     const rightArr = [];
-    let history = [[], [], []];
+    let history = { level: level, type: type, list: [[], [], []] };
     if (arr.length <= 1) {
       return arr;
     }
@@ -110,9 +110,9 @@ class BubbleSort extends React.Component {
       //   history[0] = JSON.parse(JSON.stringify(leftArr));
       //   history[1] = JSON.parse(JSON.stringify(centerArr));
       //   history[2] = JSON.parse(JSON.stringify(rightArr));
-      history[0] = leftArr;
-      history[1] = centerArr;
-      history[2] = rightArr;
+      history.list[0] = leftArr;
+      history.list[1] = centerArr;
+      history.list[2] = rightArr;
       let quickList = this.state.quickSortHistory;
       quickList.push(JSON.parse(JSON.stringify(history)));
       this.setState({
@@ -121,8 +121,8 @@ class BubbleSort extends React.Component {
       //   console.log(history, "history");
     }
 
-    const leftArrSorted = this.quickSort(leftArr);
-    const rightArrSorted = this.quickSort(rightArr);
+    const leftArrSorted = this.quickSort(leftArr, level + 1, "left");
+    const rightArrSorted = this.quickSort(rightArr, level + 1, "right");
     return leftArrSorted.concat(centerArr, rightArrSorted);
   }
   reset() {
@@ -165,7 +165,7 @@ class BubbleSort extends React.Component {
     let renderQuickItem = list => {
       return list.map((item, index) => {
         let style = {
-          left: item.index * 110 + "px"
+          left: index * 110 + "px"
         };
         style = Object.assign(style, item.style);
         return (
