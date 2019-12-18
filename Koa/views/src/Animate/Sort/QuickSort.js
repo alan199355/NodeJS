@@ -165,7 +165,7 @@ class BubbleSort extends React.Component {
     let renderQuickItem = list => {
       return list.map((item, index) => {
         let style = {
-          left: index * 110 + "px"
+          left: index * 50 + "px"
         };
         style = Object.assign(style, item.style);
         return (
