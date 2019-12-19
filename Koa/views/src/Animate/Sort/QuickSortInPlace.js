@@ -26,7 +26,8 @@ class BubbleSort extends React.Component {
         { val: 7, index: 6 },
         { val: 8, index: 7 },
         { val: 9, index: 8 }
-      ]
+      ],
+      history: []
     };
     this.history = [123];
     this.state.list.map((item, index) => {
@@ -67,7 +68,19 @@ class BubbleSort extends React.Component {
     let history = [];
     let index = 0;
     let sortedList = this.quickSort(list, 0, list.length - 1, false);
-    console.log(sortedList, "sorted");
+    history = this.state.history;
+    console.log(sortedList, history, "sorted");
+    let interval = setInterval(() => {
+      console.log(index, history, "interval");
+      if (index >= history.length) {
+        clearInterval(interval);
+      } else {
+        this.setState({
+          list: history[index]
+        });
+        index++;
+      }
+    }, 1500);
   }
   quickSort(
     originalArray,
@@ -89,16 +102,30 @@ class BubbleSort extends React.Component {
           swap(partitionIndex, i);
           partitionIndex += 1;
         }
+        let history = this.state.history;
+        history.push(JSON.parse(JSON.stringify(array)));
+        this.setState({
+          history: history
+        });
+        // console.log(
+        //   JSON.parse(JSON.stringify(array)),
+        //   i,
+        //   partitionIndex,
+        //   lo,
+        //   hi,
+        //   "sort"
+        // );
       }
       swap(partitionIndex, hi);
+
       return partitionIndex;
     };
     if (inputLo < inputHi) {
       const partitionIndex = partitionArray(inputLo, inputHi);
-      console.log(partitionIndex, "partition");
-      // this.sort(array, inputLo, partitionIndex - 1, true);
-      // this.sort(array, partitionIndex + 1, inputHi, true);
+      this.quickSort(array, inputLo, partitionIndex - 1, true);
+      this.quickSort(array, partitionIndex + 1, inputHi, true);
     }
+
     return array;
   }
   reset() {
@@ -110,12 +137,13 @@ class BubbleSort extends React.Component {
   render() {
     let renderItem = () => {
       let list = JSON.parse(JSON.stringify(this.state.list));
-      list.sort((a, b) => {
-        return a.resetIndex - b.resetIndex;
-      });
+      console.log(list, "render");
+      // list.sort((a, b) => {
+      //   return a.resetIndex - b.resetIndex;
+      // });
       return list.map((item, index) => {
         let style = {
-          left: item.index * 110 + "px"
+          left: index * 110 + "px"
         };
         style = Object.assign(style, item.style);
         return (
