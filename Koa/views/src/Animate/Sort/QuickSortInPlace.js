@@ -57,10 +57,12 @@ class BubbleSort extends React.Component {
       originalList.splice(randomIndex, 1);
     }
     this.setState({
-      list: targetList
+      list: targetList,
+      history: []
     });
     console.log(targetList);
   }
+
   next() {}
   async sort() {
     let list = this.state.list;
@@ -93,15 +95,22 @@ class BubbleSort extends React.Component {
       const swap = (left, right) => {
         const temp = array[left];
         array[left] = array[right];
+        array[left].index = right;
         array[right] = temp;
+        array[right].index = left;
       };
       const pivot = array[hi];
+      pivot.class = "blink";
       let partitionIndex = lo;
       for (let i = lo; i < hi; i++) {
+        let prePar = partitionIndex >= 1 ? partitionIndex - 1 : 0;
+        array[prePar].class = "";
+        array[i].class = "blink";
         if (array[i].val < pivot.val) {
           swap(partitionIndex, i);
           partitionIndex += 1;
         }
+
         let history = this.state.history;
         history.push(JSON.parse(JSON.stringify(array)));
         this.setState({
@@ -117,7 +126,7 @@ class BubbleSort extends React.Component {
         // );
       }
       swap(partitionIndex, hi);
-
+      pivot.class = "";
       return partitionIndex;
     };
     if (inputLo < inputHi) {
@@ -125,7 +134,11 @@ class BubbleSort extends React.Component {
       this.quickSort(array, inputLo, partitionIndex - 1, true);
       this.quickSort(array, partitionIndex + 1, inputHi, true);
     }
-
+    let history = this.state.history;
+    history.push(JSON.parse(JSON.stringify(array)));
+    this.setState({
+      history: history
+    });
     return array;
   }
   reset() {
