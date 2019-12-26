@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import "./BubbleSort.scss";
+import "./QuickSortInPlace.scss";
 class BubbleSort extends React.Component {
   constructor() {
     super();
@@ -91,6 +91,11 @@ class BubbleSort extends React.Component {
     recursiveCall = false
   ) {
     const array = recursiveCall ? originalArray : [...originalArray];
+    const resetType = list => {
+      list.map(item => {
+        if (item.type) item.type = "";
+      });
+    };
     const partitionArray = (lo, hi) => {
       const swap = (left, right) => {
         const temp = array[left];
@@ -101,14 +106,20 @@ class BubbleSort extends React.Component {
       };
       const pivot = array[hi];
       pivot.class = "blink";
+      pivot.type = "pivot";
       let partitionIndex = lo;
       for (let i = lo; i < hi; i++) {
         let prePar = partitionIndex >= 1 ? partitionIndex - 1 : 0;
+        let preIn = i >= 1 ? i - 1 : 0;
         array[prePar].class = "";
+        array[preIn].class = "";
         array[i].class = "blink";
         if (array[i].val < pivot.val) {
+          array[i].type = "low";
           swap(partitionIndex, i);
           partitionIndex += 1;
+        } else {
+          array[i].type = "high";
         }
 
         let history = this.state.history;
@@ -126,7 +137,9 @@ class BubbleSort extends React.Component {
         // );
       }
       swap(partitionIndex, hi);
+      array[hi - 1].class = "";
       pivot.class = "";
+      resetType(array);
       return partitionIndex;
     };
     if (inputLo < inputHi) {
@@ -156,7 +169,7 @@ class BubbleSort extends React.Component {
       // });
       return list.map((item, index) => {
         let style = {
-          left: index * 110 + "px"
+          left: index * 120 + "px"
         };
         style = Object.assign(style, item.style);
         return (
@@ -167,8 +180,11 @@ class BubbleSort extends React.Component {
       });
     };
     return (
-      <div className="bubble-container">
+      <div className="quick-container">
         <ul className="list">{renderItem()}</ul>
+        <fieldset className="low">
+          <legend>low array</legend>
+        </fieldset>
         <Button onClick={this.randomList} type="primary">
           Random11
         </Button>
