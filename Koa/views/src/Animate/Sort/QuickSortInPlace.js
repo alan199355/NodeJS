@@ -29,7 +29,7 @@ class BubbleSort extends React.Component {
       ],
       history: []
     };
-    this.history = [123];
+
     this.state.list.map((item, index) => {
       item.index = index;
       item.resetIndex = index;
@@ -71,14 +71,14 @@ class BubbleSort extends React.Component {
     let index = 0;
     let sortedList = this.quickSort(list, 0, list.length - 1, false);
     history = this.state.history;
-    console.log(sortedList, history, "sorted");
+    // console.log(sortedList, history, "sorted");
     let interval = setInterval(() => {
       console.log(index, history, "interval");
       if (index >= history.length) {
         clearInterval(interval);
       } else {
         this.setState({
-          list: history[index]
+          list: history[index].list
         });
         index++;
       }
@@ -123,7 +123,12 @@ class BubbleSort extends React.Component {
         }
 
         let history = this.state.history;
-        history.push(JSON.parse(JSON.stringify(array)));
+        let historyItem = {
+          list: JSON.parse(JSON.stringify(array)),
+          partion: partitionIndex,
+          index: i
+        };
+        history.push(historyItem);
         this.setState({
           history: history
         });
@@ -146,12 +151,17 @@ class BubbleSort extends React.Component {
       const partitionIndex = partitionArray(inputLo, inputHi);
       this.quickSort(array, inputLo, partitionIndex - 1, true);
       this.quickSort(array, partitionIndex + 1, inputHi, true);
+      let history = this.state.history;
+      let historyItem = {
+        list: JSON.parse(JSON.stringify(array)),
+        partion: partitionIndex
+      };
+      history.push(historyItem);
+      this.setState({
+        history: history
+      });
     }
-    let history = this.state.history;
-    history.push(JSON.parse(JSON.stringify(array)));
-    this.setState({
-      history: history
-    });
+
     return array;
   }
   reset() {
@@ -161,6 +171,7 @@ class BubbleSort extends React.Component {
     });
   }
   render() {
+    // 渲染数字列表
     let renderItem = () => {
       let list = JSON.parse(JSON.stringify(this.state.list));
       console.log(list, "render");
@@ -179,9 +190,31 @@ class BubbleSort extends React.Component {
         );
       });
     };
+    // 渲染fieldset
+    let renderFieldset = () => {
+      let item = JSON.parse(JSON.stringify(this.state.list));
+      let partion = item.partion || 0;
+      let index = item.index || 0;
+      let lowStart = 0;
+      let lowEnd = partion - 1 >= 0 ? partion - 1 : 0;
+      let lowLength = lowEnd - lowStart;
+      let hignStart = partion;
+      let hignEnd = index;
+      let lowStyle = {
+        width: lowLength * 120 + "px",
+        left: -10 + "px"
+      };
+      console.log(lowEnd, lowStart, "fieldset");
+      return (
+        <fieldset style={lowStyle}>
+          <legend>low array</legend>
+        </fieldset>
+      );
+    };
     return (
       <div className="quick-container">
         <ul className="list">{renderItem()}</ul>
+        {renderFieldset()}
         <fieldset className="low">
           <legend>low array</legend>
         </fieldset>
