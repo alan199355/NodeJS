@@ -1,9 +1,9 @@
-import React from "react";
-import { Button } from "antd";
-import "./QuickSortInPlace.scss";
+import React from 'react'
+import { Button } from 'antd'
+import './QuickSortInPlace.scss'
 class BubbleSort extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       list: [
         { val: 7 },
@@ -27,62 +27,64 @@ class BubbleSort extends React.Component {
         { val: 8, index: 7 },
         { val: 9, index: 8 }
       ],
-      history: []
-    };
+      history: [],
+      index: 0
+    }
 
     this.state.list.map((item, index) => {
-      item.index = index;
-      item.resetIndex = index;
-    });
-    this.randomList = this.randomList.bind(this);
-    this.sort = this.sort.bind(this);
-    this.reset = this.reset.bind(this);
-    this.next = this.next.bind(this);
-    this.quickSort = this.quickSort.bind(this);
+      item.index = index
+      item.resetIndex = index
+    })
+    this.randomList = this.randomList.bind(this)
+    this.sort = this.sort.bind(this)
+    this.reset = this.reset.bind(this)
+    this.next = this.next.bind(this)
+    this.quickSort = this.quickSort.bind(this)
   }
   randomList() {
-    let originalList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let randomIndex = 0;
-    let targetList = [];
-    let index = 0;
+    let originalList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let randomIndex = 0
+    let targetList = []
+    let index = 0
     while (originalList.length > 0) {
-      randomIndex = Math.floor(Math.random() * originalList.length);
-      let val = originalList[randomIndex];
+      randomIndex = Math.floor(Math.random() * originalList.length)
+      let val = originalList[randomIndex]
       targetList.push({
         val: val,
         index: index,
         resetIndex: index
-      });
-      index++;
-      originalList.splice(randomIndex, 1);
+      })
+      index++
+      originalList.splice(randomIndex, 1)
     }
     this.setState({
       list: targetList,
       history: []
-    });
-    console.log(targetList);
+    })
+    console.log(targetList)
   }
 
   next() {}
   async sort() {
-    let list = this.state.list;
+    let list = this.state.list
     // let list = [7, 1, 3, 9, 6, 2, 8, 5, 4];
-    let history = [];
-    let index = 0;
-    let sortedList = this.quickSort(list, 0, list.length - 1, false);
-    history = this.state.history;
+    let history = {}
+    let index = 0
+    let sortedList = this.quickSort(list, 0, list.length - 1, false)
+    history = this.state.history
     // console.log(sortedList, history, "sorted");
     let interval = setInterval(() => {
-      console.log(index, history, "interval");
+      console.log(index, history, 'interval')
       if (index >= history.length) {
-        clearInterval(interval);
+        clearInterval(interval)
       } else {
         this.setState({
-          list: history[index].list
-        });
-        index++;
+          list: history[index].list,
+          index: index
+        })
+        index++
       }
-    }, 1500);
+    }, 1500)
   }
   quickSort(
     originalArray,
@@ -90,48 +92,48 @@ class BubbleSort extends React.Component {
     inputHi = arr.length - 1,
     recursiveCall = false
   ) {
-    const array = recursiveCall ? originalArray : [...originalArray];
+    const array = recursiveCall ? originalArray : [...originalArray]
     const resetType = list => {
       list.map(item => {
-        if (item.type) item.type = "";
-      });
-    };
+        if (item.type) item.type = ''
+      })
+    }
     const partitionArray = (lo, hi) => {
       const swap = (left, right) => {
-        const temp = array[left];
-        array[left] = array[right];
-        array[left].index = right;
-        array[right] = temp;
-        array[right].index = left;
-      };
-      const pivot = array[hi];
-      pivot.class = "blink";
-      pivot.type = "pivot";
-      let partitionIndex = lo;
+        const temp = array[left]
+        array[left] = array[right]
+        array[left].index = right
+        array[right] = temp
+        array[right].index = left
+      }
+      const pivot = array[hi]
+      pivot.class = 'blink'
+      pivot.type = 'pivot'
+      let partitionIndex = lo
       for (let i = lo; i < hi; i++) {
-        let prePar = partitionIndex >= 1 ? partitionIndex - 1 : 0;
-        let preIn = i >= 1 ? i - 1 : 0;
-        array[prePar].class = "";
-        array[preIn].class = "";
-        array[i].class = "blink";
+        let prePar = partitionIndex >= 1 ? partitionIndex - 1 : 0
+        let preIn = i >= 1 ? i - 1 : 0
+        array[prePar].class = ''
+        array[preIn].class = ''
+        array[i].class = 'blink'
         if (array[i].val < pivot.val) {
-          array[i].type = "low";
-          swap(partitionIndex, i);
-          partitionIndex += 1;
+          array[i].type = 'low'
+          swap(partitionIndex, i)
+          partitionIndex += 1
         } else {
-          array[i].type = "high";
+          array[i].type = 'high'
         }
 
-        let history = this.state.history;
+        let history = this.state.history
         let historyItem = {
           list: JSON.parse(JSON.stringify(array)),
           partion: partitionIndex,
           index: i
-        };
-        history.push(historyItem);
+        }
+        history.push(historyItem)
         this.setState({
           history: history
-        });
+        })
         // console.log(
         //   JSON.parse(JSON.stringify(array)),
         //   i,
@@ -141,97 +143,100 @@ class BubbleSort extends React.Component {
         //   "sort"
         // );
       }
-      swap(partitionIndex, hi);
-      array[hi - 1].class = "";
-      pivot.class = "";
-      resetType(array);
-      return partitionIndex;
-    };
+      swap(partitionIndex, hi)
+      array[hi - 1].class = ''
+      pivot.class = ''
+      resetType(array)
+      return partitionIndex
+    }
     if (inputLo < inputHi) {
-      const partitionIndex = partitionArray(inputLo, inputHi);
-      this.quickSort(array, inputLo, partitionIndex - 1, true);
-      this.quickSort(array, partitionIndex + 1, inputHi, true);
-      let history = this.state.history;
+      const partitionIndex = partitionArray(inputLo, inputHi)
+      this.quickSort(array, inputLo, partitionIndex - 1, true)
+      this.quickSort(array, partitionIndex + 1, inputHi, true)
+      let history = this.state.history
       let historyItem = {
         list: JSON.parse(JSON.stringify(array)),
         partion: partitionIndex
-      };
-      history.push(historyItem);
+      }
+      history.push(historyItem)
       this.setState({
         history: history
-      });
+      })
     }
 
-    return array;
+    return array
   }
   reset() {
-    let resetList = this.state.resetList;
+    let resetList = this.state.resetList
     this.setState({
       list: resetList
-    });
+    })
   }
   render() {
     // 渲染数字列表
     let renderItem = () => {
-      let list = JSON.parse(JSON.stringify(this.state.list));
-      console.log(list, "render");
+      let data = JSON.parse(JSON.stringify(this.state.list))
+      let list = data
+      console.log(list, 'render')
       // list.sort((a, b) => {
       //   return a.resetIndex - b.resetIndex;
       // });
       return list.map((item, index) => {
         let style = {
-          left: index * 120 + "px"
-        };
-        style = Object.assign(style, item.style);
+          left: index * 120 + 'px'
+        }
+        style = Object.assign(style, item.style)
         return (
           <li className={item.class} key={item.val} style={style}>
             {item.val}
           </li>
-        );
-      });
-    };
+        )
+      })
+    }
     // 渲染fieldset
     let renderFieldset = () => {
-      let item = JSON.parse(JSON.stringify(this.state.list));
-      let partion = item.partion || 0;
-      let index = item.index || 0;
-      let lowStart = 0;
-      let lowEnd = partion - 1 >= 0 ? partion - 1 : 0;
-      let lowLength = lowEnd - lowStart;
-      let hignStart = partion;
-      let hignEnd = index;
+      let history = JSON.parse(JSON.stringify(this.state.history))
+      let historyIndex = this.state.index
+      let item = history[historyIndex] || {}
+      let partion = item.partion || 0
+      let index = item.index || 0
+      let lowStart = 0
+      let lowEnd = partion - 1 >= 0 ? partion : 0
+      let lowLength = lowEnd - lowStart
+      let hignStart = partion
+      let hignEnd = index
       let lowStyle = {
-        width: lowLength * 120 + "px",
-        left: -10 + "px"
-      };
-      console.log(lowEnd, lowStart, "fieldset");
+        width: lowLength * 120 + 'px',
+        left: -10 + 'px'
+      }
+      console.log(item, partion, lowEnd, lowStart, 'fieldset')
       return (
         <fieldset style={lowStyle}>
           <legend>low array</legend>
         </fieldset>
-      );
-    };
+      )
+    }
     return (
       <div className="quick-container">
         <ul className="list">{renderItem()}</ul>
         {renderFieldset()}
-        <fieldset className="low">
-          <legend>low array</legend>
-        </fieldset>
-        <Button onClick={this.randomList} type="primary">
-          Random11
-        </Button>
-        <Button onClick={this.sort} type="primary">
-          Sort
-        </Button>
-        <Button onClick={this.next} type="primary">
-          Next
-        </Button>
-        <Button onClick={this.reset} type="primary">
-          Reset
-        </Button>
+
+        <div className="btn-group">
+          <Button onClick={this.randomList} type="primary">
+            Random11
+          </Button>
+          <Button onClick={this.sort} type="primary">
+            Sort
+          </Button>
+          <Button onClick={this.next} type="primary">
+            Next
+          </Button>
+          <Button onClick={this.reset} type="primary">
+            Reset
+          </Button>
+        </div>
       </div>
-    );
+    )
   }
 }
-export default BubbleSort;
+export default BubbleSort

@@ -1,35 +1,35 @@
-import React from "react";
-import { Layout, Menu, Icon } from "antd";
-import { Switch, Route, NavLink } from "react-router-dom";
-import "antd/dist/antd.css";
-import GetUserInfo from "../UserInfo/GetUserInfo/GetUserInfo";
-import UserList from "../User/UserList/UserList";
-import Test from "../User/UserList/Test";
-import Debounce from "../Animate/Debounce";
-import Throttle from "../Animate/Throttle";
-import BubbleSort from "../Animate/Sort/BubbleSort";
-import QuickSort from "../Animate/Sort/QuickSort";
-import QuickSortInplace from "../Animate/Sort/QuickSortInPlace";
-const { Header, Content, Footer, Sider } = Layout;
-const SubMenu = Menu.SubMenu;
+import React from 'react'
+import { Layout, Menu, Icon } from 'antd'
+import { Switch, Route, NavLink } from 'react-router-dom'
+import 'antd/dist/antd.css'
+import GetUserInfo from '../UserInfo/GetUserInfo/GetUserInfo'
+import UserList from '../User/UserList/UserList'
+import Test from '../User/UserList/Test'
+import Debounce from '../Animate/Debounce'
+import Throttle from '../Animate/Throttle'
+import BubbleSort from '../Animate/Sort/BubbleSort'
+import QuickSort from '../Animate/Sort/QuickSort'
+import QuickSortInplace from '../Animate/Sort/QuickSortInPlace'
+const { Header, Content, Footer, Sider } = Layout
+const SubMenu = Menu.SubMenu
 // import Sider from "antd/lib/layout/Sider";
 
 class LayoutContainer extends React.Component {
   constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
   handleClick(e) {
-    console.log(e);
+    console.log(e)
   }
   render() {
     return (
       <Layout>
         <Sider
           style={{
-            overflow: "auto",
-            height: "100vh",
-            position: "fixed",
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
             left: 0
           }}
         >
@@ -37,7 +37,7 @@ class LayoutContainer extends React.Component {
             onClick={this.handleClick}
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["4"]}
+            defaultSelectedKeys={['4']}
           >
             <Menu.Item key="1">
               <Icon type="user" />
@@ -70,15 +70,15 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="10">
                 <NavLink to="/home/quicksort">快速排序-非原地版</NavLink>
               </Menu.Item>
-              <Menu.Item key="10">
+              <Menu.Item key="11">
                 <NavLink to="/home/quicksortInplace">快速排序-原地版</NavLink>
               </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ background: "#fff", padding: 0 }} />
-          <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+          <Header style={{ background: '#fff', padding: 0 }} />
+          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div>
               <Switch>
                 <Route path="/home/getUserInfo" component={GetUserInfo} />
@@ -97,7 +97,7 @@ class LayoutContainer extends React.Component {
           </Content>
         </Layout>
       </Layout>
-    );
+    )
   }
 }
-export default LayoutContainer;
+export default LayoutContainer
