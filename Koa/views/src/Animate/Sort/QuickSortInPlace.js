@@ -181,6 +181,11 @@ class BubbleSort extends React.Component {
       // list.sort((a, b) => {
       //   return a.resetIndex - b.resetIndex;
       // });
+      let renderPivot = item => {
+        if (item.type === 'pivot') {
+          return <span>pivot</span>
+        }
+      }
       return list.map((item, index) => {
         let style = {
           left: index * 120 + 'px'
@@ -189,6 +194,7 @@ class BubbleSort extends React.Component {
         return (
           <li className={item.class} key={item.val} style={style}>
             {item.val}
+            {renderPivot(item)}
           </li>
         )
       })
@@ -203,17 +209,29 @@ class BubbleSort extends React.Component {
       let lowStart = 0
       let lowEnd = partion - 1 >= 0 ? partion : 0
       let lowLength = lowEnd - lowStart
-      let hignStart = partion
-      let hignEnd = index
+      // let hignStart = partion
+      // let hignEnd = index
+      let highLength = index - partion
       let lowStyle = {
         width: lowLength * 120 + 'px',
         left: -10 + 'px'
       }
+      let highStyle = {
+        width: highLength * 120 + 'px',
+        left: partion * 120 - 10 + 'px'
+      }
+      lowStyle.display = lowLength > 0 ? 'block' : 'none'
+      highStyle.display = highLength > 0 ? 'block' : 'none'
       console.log(item, partion, lowEnd, lowStart, 'fieldset')
       return (
-        <fieldset style={lowStyle}>
-          <legend>low array</legend>
-        </fieldset>
+        <div>
+          <fieldset style={lowStyle}>
+            <legend>low array</legend>
+          </fieldset>
+          <fieldset style={highStyle}>
+            <legend>high array</legend>
+          </fieldset>
+        </div>
       )
     }
     return (

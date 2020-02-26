@@ -1,47 +1,44 @@
-const webpack=require('webpack');
-const ExtractTextPlugin=require('extract-text-webpack-plugin');
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
+module.exports = smp.wrap({
+  entry: ['react-hot-loader/patch', './index.js'],
 
-module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    "./index.js"
-  ],
-  
   output: {
-    filename: "bundle.js",
-    publicPath: ""
+    filename: 'bundle.js',
+    publicPath: ''
   },
-  devServer:{
-    hot:true
+  devServer: {
+    hot: true
   },
   module: {
     loaders: [
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        options:{
-          'presets':['react','es2015'],
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'es2015']
         }
-        
       },
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: 'style-loader!css-loader'
       },
-      {test: /\.svg/, loader: 'svg-url-loader'},
+      { test: /\.svg/, loader: 'svg-url-loader' },
       {
         test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader"
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   },
-  plugins: [    
+  plugins: [
     new webpack.DllReferencePlugin({
-        context: __dirname,
-        manifest: require('./manifest.json'),
+      context: __dirname,
+      manifest: require('./manifest.json')
     }),
     new webpack.HotModuleReplacementPlugin()
-],
-};
+  ]
+})
