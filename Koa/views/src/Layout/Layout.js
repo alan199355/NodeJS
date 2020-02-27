@@ -10,6 +10,7 @@ import Throttle from '../Animate/Throttle'
 import BubbleSort from '../Animate/Sort/BubbleSort'
 import QuickSort from '../Animate/Sort/QuickSort'
 import QuickSortInplace from '../Animate/Sort/QuickSortInPlace'
+import BSTree from '../Animate/Tree/binary-search-tree/BSTree'
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
 // import Sider from "antd/lib/layout/Sider";
@@ -73,6 +74,9 @@ class LayoutContainer extends React.Component {
               <Menu.Item key="11">
                 <NavLink to="/home/quicksortInplace">快速排序-原地版</NavLink>
               </Menu.Item>
+              <Menu.Item key="12">
+                <NavLink to="/home/bsTree">二叉搜索树</NavLink>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -88,6 +92,7 @@ class LayoutContainer extends React.Component {
                 <Route path="/home/throttle" component={Throttle}></Route>
                 <Route path="/home/bubbleSort" component={BubbleSort}></Route>
                 <Route path="/home/quickSort" component={QuickSort}></Route>
+                <Route path="/home/bsTree" component={BSTree}></Route>
                 <Route
                   path="/home/quickSortInplace"
                   component={QuickSortInplace}
