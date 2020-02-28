@@ -13,19 +13,19 @@ class BSTree extends React.Component {
   }
   insertVal() {
     let val = Math.floor(Math.random() * 100)
-    // let bsTree = this.state.bsTree
-    // this.setState({
-    //   bsTree: bsTree.insert(val)
-    // })
-    let bsTree = new BinarySearchTree()
-    for (let i = 0; i < 10; i++) {
-      bsTree.insert(i)
-    }
-
-    console.log(bsTree, bsTree.toString())
+    let bsTree = this.state.bsTree
+    bsTree.insert(val)
+    this.setState({
+      bsTree: bsTree
+    })
+    // let bsTree = new BinarySearchTree()
+    // for (let i = -0; i < 10; i++) {
+    //   bsTree.insert(i)
+    // }
   }
   treeDetail() {
-    console.log(this.state.bsTree)
+    let bsTree = this.state.bsTree
+    console.log(bsTree, bsTree.root, bsTree.toString())
   }
   render() {
     // console.log(bsTree, 'tree')
