@@ -3,6 +3,10 @@
   height: 100vh;
   .btn-group {
     width: 100%;
+    margin-bottom: 20px;
+    button {
+      margin-right: 20px;
+    }
   }
   canvas {
     width: 1000px;

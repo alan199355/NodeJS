@@ -13,12 +13,27 @@ class BSTree extends React.Component {
     this.renderTree = this.renderTree.bind(this)
     this.renderTreeNode = this.renderTreeNode.bind(this)
     this.mapTree = this.mapTree.bind(this)
+    this.reset = this.reset.bind(this)
     let bsTree = new BinarySearchTree()
   }
+  // 重置数据和canvas
+  reset() {
+    let canvas = document.getElementById('tree')
+    let ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    let bsTree = new BinarySearchTree()
+    this.setState({
+      bsTree: bsTree
+    })
+  }
+  // 插入值
   insertVal() {
     let val = Math.floor(Math.random() * 100)
     let bsTree = this.state.bsTree
-    bsTree.insert(val)
+    if (!bsTree.contains(val)) {
+      bsTree.insert(val)
+    }
+
     console.log(bsTree, val, bsTree.toString())
 
     this.setState({
@@ -39,25 +54,34 @@ class BSTree extends React.Component {
     canvas.width = width
     canvas.height = height
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.lineWidth = 1
+    ctx.lineWidth = 0
     // ctx.beginPath()
     let bsTree = this.state.bsTree
     this.mapTree(bsTree.root, 1, 500, 80, 'root')
-
+    // this.renderTreeNode(ctx, 500, 80, bsTree.root.value)
     ctx.font = '100px'
     // ctx.lineTo(250,100)
-    ctx.stroke()
+    // ctx.stroke()
   }
+  // 遍历树，绘制每个节点
   mapTree(node, level, x, y, type) {
-    console.log(node, level, 'map')
+    // console.log(node, level, 'map')
     let canvas = document.getElementById('tree')
     let ctx = canvas.getContext('2d')
-    if (type === 'root') {
-      this.renderTreeNode(ctx, x, y, node.value)
-    } else if (type === 'left') {
+    // //  计算画布的宽度
+    // let width = canvas.offsetWidth
+    // //  计算画布的高度
+    // let height = canvas.offsetHeight
+    // //  设置宽高
+    // canvas.width = width
+    // canvas.height = height
+    ctx.beginPath()
+    if (type === 'left') {
       x -= 100
+      ctx.moveTo(x + 100, y)
     } else if (type === 'right') {
       x += 100
+      ctx.moveTo(x - 100, y)
     }
     y += 50
     this.renderTreeNode(ctx, x, y, node.value)
@@ -70,7 +94,13 @@ class BSTree extends React.Component {
   }
   renderTreeNode(ctx, x, y, val) {
     ctx.arc(x, y, 25, 0, 2 * Math.PI)
+    // ctx.clearRect(x - 25, y - 25, 50, 50)
+    ctx.fillStyle = '#ff0000'
+    ctx.font = '80px #ff0000'
+    // ctx.strokeText(val, x - 5, y + 5)
     ctx.fillText(val, x - 5, y + 5)
+    ctx.stroke()
+    ctx.closePath()
   }
   treeDetail() {
     let bsTree = this.state.bsTree
@@ -87,6 +117,9 @@ class BSTree extends React.Component {
           </Button>
           <Button onClick={this.treeDetail} type="primary">
             详情
+          </Button>
+          <Button onClick={this.reset} type="primary">
+            重置
           </Button>
         </div>
         <canvas id="tree"></canvas>
