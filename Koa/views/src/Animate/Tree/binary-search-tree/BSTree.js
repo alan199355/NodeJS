@@ -30,6 +30,7 @@ class BSTree extends React.Component {
   insertVal() {
     let val = Math.floor(Math.random() * 100)
     let bsTree = this.state.bsTree
+    // 判断值是否已存在树中
     if (!bsTree.contains(val)) {
       bsTree.insert(val)
     }
@@ -58,9 +59,7 @@ class BSTree extends React.Component {
     // ctx.beginPath()
     let bsTree = this.state.bsTree
     this.mapTree(bsTree.root, 1, 500, 80, 'root')
-    // this.renderTreeNode(ctx, 500, 80, bsTree.root.value)
     ctx.font = '100px'
-    // ctx.lineTo(250,100)
     // ctx.stroke()
   }
   // 遍历树，绘制每个节点
@@ -68,23 +67,18 @@ class BSTree extends React.Component {
     // console.log(node, level, 'map')
     let canvas = document.getElementById('tree')
     let ctx = canvas.getContext('2d')
-    // //  计算画布的宽度
-    // let width = canvas.offsetWidth
-    // //  计算画布的高度
-    // let height = canvas.offsetHeight
-    // //  设置宽高
-    // canvas.width = width
-    // canvas.height = height
+
     ctx.beginPath()
+
     if (type === 'left') {
+      // ctx.moveTo(x, y)
       x -= 100
-      ctx.moveTo(x + 100, y)
     } else if (type === 'right') {
+      // ctx.moveTo(x, y)
       x += 100
-      ctx.moveTo(x - 100, y)
     }
     y += 50
-    this.renderTreeNode(ctx, x, y, node.value)
+    this.renderTreeNode(ctx, x, y, node.value, type)
     if (node.left) {
       this.mapTree(node.left, level + 1, x, y, 'left')
     }
@@ -92,7 +86,7 @@ class BSTree extends React.Component {
       this.mapTree(node.right, level + 1, x, y, 'right')
     }
   }
-  renderTreeNode(ctx, x, y, val) {
+  renderTreeNode(ctx, x, y, val, type) {
     ctx.arc(x, y, 25, 0, 2 * Math.PI)
     // ctx.clearRect(x - 25, y - 25, 50, 50)
     ctx.fillStyle = '#ff0000'
@@ -101,6 +95,16 @@ class BSTree extends React.Component {
     ctx.fillText(val, x - 5, y + 5)
     ctx.stroke()
     ctx.closePath()
+
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+    if (type === 'left') {
+      ctx.lineTo(x + 100, y - 50)
+    } else if (type === 'right') {
+      ctx.lineTo(x - 100, y - 50)
+    }
+    ctx.closePath()
+    ctx.stroke()
   }
   treeDetail() {
     let bsTree = this.state.bsTree
