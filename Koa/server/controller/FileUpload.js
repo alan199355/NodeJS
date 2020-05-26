@@ -3,9 +3,9 @@ const path = require("path");
 const App = require("./app");
 const OSS = require("ali-oss");
 const client = new OSS({
-  region: "oss-cn-beijing",
-  accessKeyId: "LTAI5yADpOLfg8Lg",
-  accessKeySecret: "rUTOyTTFW5Hbl0ooGqAUFu2O5PN9xZ"
+  region: "",
+  accessKeyId: "",
+  accessKeySecret: ""
 });
 const co = require("co");
 const service = require("../service/FileUpload");
